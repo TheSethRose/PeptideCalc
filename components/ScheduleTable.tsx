@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { ScheduleRow } from '../types';
+import { formatUnits } from '../utils/calculations';
 import { format } from 'date-fns';
 import { AlertTriangle, Droplets, ArrowRight } from 'lucide-react';
 import { Card, CardHeader, Badge } from './ui';
@@ -89,6 +90,9 @@ export const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule, headerAc
     );
   }
 
+  const noteRows = (notes: string[]) =>
+    notes.filter((note) => note.startsWith('Finished') || note.includes('Stock depleted'));
+
   return (
     <Card className="flex flex-col">
       <CardHeader
@@ -102,21 +106,21 @@ export const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule, headerAc
             >
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--info)' }} />
-                New Vial
+                New Supply
               </div>
               <div className="flex items-center gap-1.5">
                 <span
                   className="w-2 h-2 rounded-full"
                   style={{ backgroundColor: 'var(--purple)' }}
                 />
-                Buy Supplies
+                Purchase
               </div>
               <div className="flex items-center gap-1.5">
                 <span
                   className="w-2 h-2 rounded-full"
                   style={{ backgroundColor: 'var(--warning)' }}
                 />
-                Reorder
+                Reorder Peptides
               </div>
             </div>
             {headerAction}
@@ -225,7 +229,7 @@ export const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule, headerAc
                 </td>
                 <td className="py-3 px-4 text-right tabular-nums">
                   <span className="text-xs font-semibold" style={{ color: 'var(--primary)' }}>
-                    {row.doseUnits}
+                    {formatUnits(row.doseUnits)}
                   </span>
                 </td>
                 <td className="py-3 px-4 text-right tabular-nums">
@@ -252,12 +256,7 @@ export const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule, headerAc
                       <div className="flex items-baseline gap-1">
                         <span
                           className="text-xs font-medium"
-                          style={{
-                            color:
-                              row.vialMgRemainingAfter === 0
-                                ? 'var(--destructive)'
-                                : 'var(--card-foreground)',
-                          }}
+                          style={{ color: 'var(--card-foreground)' }}
                         >
                           {Math.max(0, row.vialMgRemainingAfter).toFixed(1)} mg
                         </span>
@@ -268,12 +267,18 @@ export const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule, headerAc
                     </div>
                     {/* Event Badges */}
                     <div className="flex flex-wrap gap-1 mt-0.5">
-                      {row.isNewVial && <Badge variant="info">New Vial</Badge>}
-                      {row.isNewBaw && <Badge variant="purple">New Water</Badge>}
-                      {row.isNewSyringeBox && <Badge variant="purple">New Syringes</Badge>}
+                      {row.isNewVial && <Badge variant="info">New Peptide</Badge>}
+                      {row.isNewBaw && <Badge variant="info">New Bacteriostatic Water</Badge>}
+                      {row.isNewSyringeBox && <Badge variant="info">New Syringe Box</Badge>}
+                      {row.didPurchaseBaw && (
+                        <Badge variant="purple">Purchase Bacteriostatic Water</Badge>
+                      )}
+                      {row.didPurchaseSyringes && (
+                        <Badge variant="purple">Purchase Syringes</Badge>
+                      )}
                       {row.isReorderWarning && (
                         <Badge variant="warning">
-                          <AlertTriangle className="w-3 h-3" /> Reorder
+                          <AlertTriangle className="w-3 h-3" /> Reorder Peptides
                         </Badge>
                       )}
                     </div>
@@ -285,6 +290,15 @@ export const ScheduleTable: React.FC<ScheduleTableProps> = ({ schedule, headerAc
                         style={{ color: 'var(--destructive)' }}
                       >
                         <AlertTriangle className="w-3 h-3" /> {w}
+                      </span>
+                    ))}
+                    {noteRows(row.notes).map((note, i) => (
+                      <span
+                        key={`note-${i}`}
+                        className="text-[10px] font-medium"
+                        style={{ color: 'var(--muted-foreground)' }}
+                      >
+                        {note}
                       </span>
                     ))}
                   </div>

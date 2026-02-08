@@ -22,11 +22,12 @@ export const PeptidesSection: React.FC<PeptidesSectionProps> = ({ vials, setVial
       ...vials,
       {
         id: crypto.randomUUID?.() || String(Math.random() * 10000),
-        name: `Vial ${vials.length + 1}`,
+        name: `Peptide ${vials.length + 1}`,
         cost: 0,
         mg: 60,
         waterAddedMl: 2.4,
         inUse: false,
+        onHand: false,
       },
     ]);
   };
@@ -53,7 +54,7 @@ export const PeptidesSection: React.FC<PeptidesSectionProps> = ({ vials, setVial
         <thead>
           <tr style={{ borderBottom: '1px solid var(--border)' }}>
             <th
-              className="text-left py-2 text-xs font-semibold w-[35%]"
+              className="text-left py-2 text-xs font-semibold w-[30%]"
               style={{ color: 'var(--muted-foreground)' }}
             >
               Name
@@ -76,7 +77,13 @@ export const PeptidesSection: React.FC<PeptidesSectionProps> = ({ vials, setVial
             >
               Mix Vol. (mL)
             </th>
-            <th className="w-[10%]" />
+            <th
+              className="text-center py-2 px-1 text-xs font-semibold w-[10%]"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
+              On Hand
+            </th>
+            <th className="w-[5%]" />
           </tr>
         </thead>
         <tbody>
@@ -114,10 +121,18 @@ export const PeptidesSection: React.FC<PeptidesSectionProps> = ({ vials, setVial
               <td className="py-2 px-1">
                 <input
                   type="number"
-                  step="0.1"
+                  step="0.01"
                   value={vial.waterAddedMl}
                   onChange={(e) => updateVial(idx, 'waterAddedMl', parseFloat(e.target.value) || 0)}
                   style={inputStyles.table}
+                />
+              </td>
+              <td className="py-2 px-1 text-center">
+                <input
+                  type="checkbox"
+                  checked={vial.onHand ?? true}
+                  onChange={(e) => updateVial(idx, 'onHand', e.target.checked)}
+                  aria-label={`Mark ${vial.name} as on hand`}
                 />
               </td>
               <td className="py-2 text-right">

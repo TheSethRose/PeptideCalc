@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Vial, BacWaterItem, SyringeConfig, ProtocolStep } from '../types';
+import { Vial, BacWaterItem, SyringeConfig, SyringeBoxItem, ProtocolStep } from '../types';
 import { RotateCcw, Settings2, PanelLeftClose } from 'lucide-react';
 import { Card, CardHeader, CardContent } from './ui';
 import { ParametersSection } from './sections/ParametersSection';
@@ -15,6 +15,8 @@ interface InputSectionProps {
   setBawInventory: React.Dispatch<React.SetStateAction<BacWaterItem[]>>;
   syringeConfig: SyringeConfig;
   setSyringeConfig: React.Dispatch<React.SetStateAction<SyringeConfig>>;
+  syringeInventory: SyringeBoxItem[];
+  setSyringeInventory: React.Dispatch<React.SetStateAction<SyringeBoxItem[]>>;
   protocolSteps: ProtocolStep[];
   setProtocolSteps: React.Dispatch<React.SetStateAction<ProtocolStep[]>>;
   startDate: string;
@@ -36,6 +38,8 @@ export const InputSection: React.FC<InputSectionProps> = ({
   setBawInventory,
   syringeConfig,
   setSyringeConfig,
+  syringeInventory,
+  setSyringeInventory,
   protocolSteps,
   setProtocolSteps,
   startDate,
@@ -154,7 +158,11 @@ export const InputSection: React.FC<InputSectionProps> = ({
             <Divider />
             <BacWaterSection bawInventory={bawInventory} setBawInventory={setBawInventory} />
             <Divider />
-            <SyringesSection syringeConfig={syringeConfig} setSyringeConfig={setSyringeConfig} />
+            <SyringesSection
+              syringeConfig={syringeConfig}
+              syringeInventory={syringeInventory}
+              setSyringeInventory={setSyringeInventory}
+            />
           </div>
         )}
       </CardContent>

@@ -29,9 +29,10 @@ export const BacWaterSection: React.FC<BacWaterSectionProps> = ({
       ...bawInventory,
       {
         id: crypto.randomUUID?.() || String(Math.random() * 10000),
-        name: `Bottle ${bawInventory.length + 1}`,
+        name: `Bac Water ${bawInventory.length + 1}`,
         sizeMl: 10,
         cost: 15,
+        onHand: false,
       },
     ]);
   };
@@ -42,7 +43,7 @@ export const BacWaterSection: React.FC<BacWaterSectionProps> = ({
         <div className="flex items-center gap-2">
           <Droplet className="w-4 h-4" style={{ color: 'var(--info)' }} />
           <h3 className="text-sm font-bold" style={{ color: 'var(--card-foreground)' }}>
-            Bac Water
+            Bacteriostatic Water
           </h3>
         </div>
         <button
@@ -58,7 +59,7 @@ export const BacWaterSection: React.FC<BacWaterSectionProps> = ({
         <thead>
           <tr style={{ borderBottom: '1px solid var(--border)' }}>
             <th
-              className="text-left py-2 text-xs font-semibold w-[45%]"
+              className="text-left py-2 text-xs font-semibold w-[40%]"
               style={{ color: 'var(--muted-foreground)' }}
             >
               Name
@@ -75,7 +76,13 @@ export const BacWaterSection: React.FC<BacWaterSectionProps> = ({
             >
               Cost
             </th>
-            <th className="w-[15%]" />
+            <th
+              className="text-center py-2 px-1 text-xs font-semibold w-[15%]"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
+              On Hand
+            </th>
+            <th className="w-[5%]" />
           </tr>
         </thead>
         <tbody>
@@ -109,6 +116,14 @@ export const BacWaterSection: React.FC<BacWaterSectionProps> = ({
                   value={item.cost}
                   onChange={(e) => updateBaw(idx, 'cost', parseFloat(e.target.value) || 0)}
                   style={inputStyles.table}
+                />
+              </td>
+              <td className="py-2 px-1 text-center">
+                <input
+                  type="checkbox"
+                  checked={item.onHand ?? true}
+                  onChange={(e) => updateBaw(idx, 'onHand', e.target.checked)}
+                  aria-label={`Mark ${item.name} as on hand`}
                 />
               </td>
               <td className="py-2 text-right">

@@ -5,6 +5,7 @@ export interface Vial {
   mg: number;
   waterAddedMl: number;
   inUse: boolean;
+  onHand?: boolean;
 }
 
 export interface BacWaterItem {
@@ -12,12 +13,20 @@ export interface BacWaterItem {
   name: string;
   sizeMl: number;
   cost: number;
+  onHand?: boolean;
 }
 
 export interface SyringeConfig {
   sizeMl: number;
-  costPerBox: number;
+}
+
+export interface SyringeBoxItem {
+  id: string;
+  name: string;
+  cost: number;
   countPerBox: number;
+  sizeMl: number;
+  onHand?: boolean;
 }
 
 export interface ProtocolStep {
@@ -49,6 +58,9 @@ export interface ScheduleRow {
   isNewBaw: boolean;
   isNewSyringeBox: boolean;
   isReorderWarning: boolean;
+  didPurchaseVial: boolean;
+  didPurchaseBaw: boolean;
+  didPurchaseSyringes: boolean;
   warnings: string[];
   notes: string[];
 }
