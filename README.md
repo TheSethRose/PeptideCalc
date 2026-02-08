@@ -1,19 +1,46 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# PeptideCalc
 
-# Run and deploy your AI Studio app
+A fast, private peptide inventory + dosing schedule calculator built with React and Vite.
 
-This contains everything you need to run your app locally.
+**Live app:** https://peptidecalc.vercel.app
 
-View your app in AI Studio: https://ai.studio/apps/drive/1LUWoQ_Q1i0F7lrx3kUCFH9EmgQZQGdG1
+## Features
 
-## Run Locally
+- Inventory tracking for peptides, bacteriostatic water, and syringes
+- On‑hand vs. planned supply modeling
+- Dose schedule projection with reorder lead‑time planning
+- Cost projections and weekly value tracking
+- Markdown export
+- Light/dark theme toggle
 
-**Prerequisites:** Node.js
+## Tech Stack
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- React 19 + TypeScript
+- Vite 6
+- date-fns
+- lucide-react
+
+## Getting Started
+
+**Prerequisites:** Node.js 18+ and pnpm (recommended)
+
+Install dependencies:
+
+- `pnpm install`
+
+Run the dev server:
+
+- `pnpm dev`
+
+Other scripts:
+
+- `pnpm build` — production build
+- `pnpm preview` — preview the production build
+- `pnpm lint` — lint
+- `pnpm typecheck` — TypeScript type checks
+
+## Everyday Peptides
+
+**Recommended: Everyday Peptides**
+
+Third‑party testing with batch‑level reporting.
