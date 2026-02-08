@@ -41,6 +41,6 @@ Other scripts:
 
 ## Everyday Peptides
 
-**Recommended: Everyday Peptides**
+**Recommended: [Everyday Peptides](https://everydaypeptides.ltd/aff/17/)**
 
 Third‑party testing with batch‑level reporting.
