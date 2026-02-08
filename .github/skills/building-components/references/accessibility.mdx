@@ -37,7 +37,7 @@ Every interactive element must be keyboard accessible. Users should be able to n
 // ✅ Complete keyboard support
 function Menu() {
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    switch(e.key) {
+    switch (e.key) {
       case 'ArrowDown':
         focusNextItem();
         break;
@@ -222,7 +222,7 @@ function Modal({ isOpen, onClose, children }) {
 
       // Focus first focusable element in modal
       const firstFocusable = modalRef.current?.querySelector<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       );
       firstFocusable?.focus();
 
@@ -247,7 +247,7 @@ function Modal({ isOpen, onClose, children }) {
     if (e.key === 'Tab') {
       // Trap focus within modal
       const focusables = modalRef.current?.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       );
 
       if (focusables && focusables.length > 0) {
@@ -276,11 +276,7 @@ function Modal({ isOpen, onClose, children }) {
       onKeyDown={handleKeyDown}
       className="modal"
     >
-      <button
-        onClick={onClose}
-        aria-label="Close dialog"
-        className="close-button"
-      >
+      <button onClick={onClose} aria-label="Close dialog" className="close-button">
         ×
       </button>
       {children}
@@ -300,25 +296,21 @@ function DropdownMenu({ items }) {
   const menuRef = useRef<HTMLUListElement>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    switch(e.key) {
+    switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
         if (!isOpen) {
           setIsOpen(true);
           setSelectedIndex(0);
         } else {
-          setSelectedIndex(prev =>
-            prev < items.length - 1 ? prev + 1 : 0
-          );
+          setSelectedIndex((prev) => (prev < items.length - 1 ? prev + 1 : 0));
         }
         break;
 
       case 'ArrowUp':
         e.preventDefault();
         if (isOpen) {
-          setSelectedIndex(prev =>
-            prev > 0 ? prev - 1 : items.length - 1
-          );
+          setSelectedIndex((prev) => (prev > 0 ? prev - 1 : items.length - 1));
         }
         break;
 
@@ -353,12 +345,7 @@ function DropdownMenu({ items }) {
       </button>
 
       {isOpen && (
-        <ul
-          id="dropdown-menu"
-          role="menu"
-          ref={menuRef}
-          onKeyDown={handleKeyDown}
-        >
+        <ul id="dropdown-menu" role="menu" ref={menuRef} onKeyDown={handleKeyDown}>
           {items.map((item, index) => (
             <li
               key={item.id}
@@ -391,7 +378,7 @@ function Tabs({ tabs, defaultTab = 0 }) {
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
     let newIndex = index;
 
-    switch(e.key) {
+    switch (e.key) {
       case 'ArrowLeft':
         newIndex = index > 0 ? index - 1 : tabs.length - 1;
         break;
@@ -472,7 +459,7 @@ function AccessibleForm() {
           type="email"
           aria-required="true"
           aria-invalid={!!errors.email}
-          aria-describedby={errors.email ? "email-error" : "email-help"}
+          aria-describedby={errors.email ? 'email-error' : 'email-help'}
         />
         <span id="email-help" className="help-text">
           We'll never share your email
@@ -487,21 +474,11 @@ function AccessibleForm() {
       <fieldset>
         <legend>Notification Preferences</legend>
         <div>
-          <input
-            id="notify-email"
-            type="checkbox"
-            name="notifications"
-            value="email"
-          />
+          <input id="notify-email" type="checkbox" name="notifications" value="email" />
           <label htmlFor="notify-email">Email notifications</label>
         </div>
         <div>
-          <input
-            id="notify-sms"
-            type="checkbox"
-            name="notifications"
-            value="sms"
-          />
+          <input id="notify-sms" type="checkbox" name="notifications" value="sms" />
           <label htmlFor="notify-sms">SMS notifications</label>
         </div>
       </fieldset>
@@ -634,13 +611,8 @@ function ProgressBar({ value, max = 100 }) {
       aria-valuemax={max}
       aria-label="Upload progress"
     >
-      <div
-        className="progress-fill"
-        style={{ width: `${(value / max) * 100}%` }}
-      />
-      <span className="sr-only">
-        {Math.round((value / max) * 100)}% complete
-      </span>
+      <div className="progress-fill" style={{ width: `${(value / max) * 100}%` }} />
+      <span className="sr-only">{Math.round((value / max) * 100)}% complete</span>
     </div>
   );
 }
@@ -735,10 +707,13 @@ Allow users to zoom:
 
 ```html
 <!-- ✅ Allows zooming -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!-- ❌ Prevents zooming -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+/>
 ```
 
 ## Common Pitfalls

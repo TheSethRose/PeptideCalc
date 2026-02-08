@@ -5,8 +5,8 @@ import { inputStyles } from '../ui';
 interface ParametersSectionProps {
   startDate: string;
   setStartDate: (val: string) => void;
-  startWeek: number;
-  setStartWeek: (val: number) => void;
+  currentDate: string;
+  setCurrentDate: (val: string) => void;
   discountPercent: number;
   setDiscountPercent: (val: number) => void;
   reorderLeadWeeks: number;
@@ -16,8 +16,8 @@ interface ParametersSectionProps {
 export const ParametersSection: React.FC<ParametersSectionProps> = ({
   startDate,
   setStartDate,
-  startWeek,
-  setStartWeek,
+  currentDate,
+  setCurrentDate,
   discountPercent,
   setDiscountPercent,
   reorderLeadWeeks,
@@ -33,29 +33,43 @@ export const ParametersSection: React.FC<ParametersSectionProps> = ({
 
     <div className="grid grid-cols-2 gap-3 mb-3">
       <div>
-        <label style={inputStyles.label}>Start Date</label>
+        <label style={{ ...inputStyles.label, whiteSpace: 'nowrap' }}>Start Date</label>
         <input
           type="date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
           style={inputStyles.base}
         />
+        <p className="text-[9px] mt-1" style={{ color: 'var(--muted-foreground)', opacity: 0 }}>
+          Used to calculate your current protocol week.
+        </p>
       </div>
       <div>
-        <label style={inputStyles.label}>Current Week</label>
+        <label style={{ ...inputStyles.label, whiteSpace: 'nowrap' }}>Current Date</label>
         <input
-          type="number"
-          min="1"
-          value={startWeek}
-          onChange={(e) => setStartWeek(parseInt(e.target.value) || 1)}
+          type="date"
+          value={currentDate}
+          onChange={(e) => setCurrentDate(e.target.value)}
           style={inputStyles.base}
         />
+        <p className="text-[9px] mt-1" style={{ color: 'var(--muted-foreground)' }}>
+          Used to calculate your current protocol week.
+        </p>
       </div>
     </div>
 
     <div className="grid grid-cols-2 gap-3">
       <div>
-        <label style={inputStyles.label}>Discount %</label>
+        <label
+          style={{
+            ...inputStyles.label,
+            whiteSpace: 'normal',
+            lineHeight: 1,
+            minHeight: '1rem',
+          }}
+        >
+          Discount % (for Promo)
+        </label>
         <div className="relative">
           <input
             type="number"
@@ -71,9 +85,21 @@ export const ParametersSection: React.FC<ParametersSectionProps> = ({
             style={{ left: '0.625rem', top: '0.625rem', color: 'var(--muted-foreground)' }}
           />
         </div>
+        <p className="text-[9px] mt-1" style={{ color: 'var(--muted-foreground)' }}>
+          Only if you have a personal code. Otherwise leave at 0.
+        </p>
       </div>
       <div>
-        <label style={inputStyles.label}>Lead Time (Wks)</label>
+        <label
+          style={{
+            ...inputStyles.label,
+            whiteSpace: 'normal',
+            lineHeight: 1,
+            minHeight: '1rem',
+          }}
+        >
+          Reorder Lead Time (Wks)
+        </label>
         <div className="relative">
           <input
             type="number"

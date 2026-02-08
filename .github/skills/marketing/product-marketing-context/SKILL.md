@@ -17,6 +17,7 @@ The document is stored at `.claude/product-marketing-context.md`.
 First, check if `.claude/product-marketing-context.md` already exists.
 
 **If it exists:**
+
 - Read it and summarize what's captured
 - Ask which sections they want to update
 - Only gather info for those sections
@@ -32,6 +33,7 @@ Most users prefer option 1. After presenting the draft, ask: "What needs correct
 ### Step 2: Gather Information
 
 **If auto-drafting:**
+
 1. Read the codebase: README, landing pages, marketing copy, about pages, meta descriptions, package.json, any existing docs
 2. Draft all sections based on what you find
 3. Present the draft and ask what needs correcting or is missing
@@ -41,6 +43,7 @@ Most users prefer option 1. After presenting the draft, ask: "What needs correct
 Walk through each section below conversationally, one at a time. Don't dump all questions at once.
 
 For each section:
+
 1. Briefly explain what you're capturing
 2. Ask relevant questions
 3. Confirm accuracy
@@ -53,6 +56,7 @@ For each section:
 ## Sections to Capture
 
 ### 1. Product Overview
+
 - One-line description
 - What it does (2-3 sentences)
 - Product category (what "shelf" you sit on—how customers search for you)
@@ -60,6 +64,7 @@ For each section:
 - Business model and pricing
 
 ### 2. Target Audience
+
 - Target company type (industry, size, stage)
 - Target decision-makers (roles, departments)
 - Primary use case (the main problem you solve)
@@ -67,40 +72,49 @@ For each section:
 - Specific use cases or scenarios
 
 ### 3. Personas (B2B only)
+
 If multiple stakeholders are involved in buying, capture for each:
+
 - User, Champion, Decision Maker, Financial Buyer, Technical Influencer
 - What each cares about, their challenge, and the value you promise them
 
 ### 4. Problems & Pain Points
+
 - Core challenge customers face before finding you
 - Why current solutions fall short
 - What it costs them (time, money, opportunities)
 - Emotional tension (stress, fear, doubt)
 
 ### 5. Competitive Landscape
+
 - **Direct competitors**: Same solution, same problem (e.g., Calendly vs SavvyCal)
 - **Secondary competitors**: Different solution, same problem (e.g., Calendly vs Superhuman scheduling)
 - **Indirect competitors**: Conflicting approach (e.g., Calendly vs personal assistant)
 - How each falls short for customers
 
 ### 6. Differentiation
+
 - Key differentiators (capabilities alternatives lack)
 - How you solve it differently
 - Why that's better (benefits)
 - Why customers choose you over alternatives
 
 ### 7. Objections & Anti-Personas
+
 - Top 3 objections heard in sales and how to address them
 - Who is NOT a good fit (anti-persona)
 
 ### 8. Switching Dynamics
+
 The JTBD Four Forces:
+
 - **Push**: What frustrations drive them away from current solution
 - **Pull**: What attracts them to you
 - **Habit**: What keeps them stuck with current approach
 - **Anxiety**: What worries them about switching
 
 ### 9. Customer Language
+
 - How customers describe the problem (verbatim)
 - How they describe your solution (verbatim)
 - Words/phrases to use
@@ -108,17 +122,20 @@ The JTBD Four Forces:
 - Glossary of product-specific terms
 
 ### 10. Brand Voice
+
 - Tone (professional, casual, playful, etc.)
 - Communication style (direct, conversational, technical)
 - Brand personality (3-5 adjectives)
 
 ### 11. Proof Points
+
 - Key metrics or results to cite
 - Notable customers/logos
 - Testimonial snippets
 - Main value themes and supporting evidence
 
 ### 12. Goals
+
 - Primary business goal
 - Key conversion action (what you want people to do)
 - Current metrics (if known)
@@ -132,9 +149,10 @@ After gathering information, create `.claude/product-marketing-context.md` with 
 ```markdown
 # Product Marketing Context
 
-*Last updated: [date]*
+_Last updated: [date]_
 
 ## Product Overview
+
 **One-liner:**
 **What it does:**
 **Product category:**
@@ -142,79 +160,92 @@ After gathering information, create `.claude/product-marketing-context.md` with 
 **Business model:**
 
 ## Target Audience
+
 **Target companies:**
 **Decision-makers:**
 **Primary use case:**
 **Jobs to be done:**
--
-**Use cases:**
+
+- **Use cases:**
 -
 
 ## Personas
+
 | Persona | Cares about | Challenge | Value we promise |
-|---------|-------------|-----------|------------------|
-| | | | |
+| ------- | ----------- | --------- | ---------------- |
+|         |             |           |                  |
 
 ## Problems & Pain Points
+
 **Core problem:**
 **Why alternatives fall short:**
--
-**What it costs them:**
-**Emotional tension:**
+
+- **What it costs them:**
+  **Emotional tension:**
 
 ## Competitive Landscape
+
 **Direct:** [Competitor] — falls short because...
 **Secondary:** [Approach] — falls short because...
 **Indirect:** [Alternative] — falls short because...
 
 ## Differentiation
-**Key differentiators:**
--
+
+## **Key differentiators:**
+
 **How we do it differently:**
 **Why that's better:**
 **Why customers choose us:**
 
 ## Objections
+
 | Objection | Response |
-|-----------|----------|
-| | |
+| --------- | -------- |
+|           |          |
 
 **Anti-persona:**
 
 ## Switching Dynamics
+
 **Push:**
 **Pull:**
 **Habit:**
 **Anxiety:**
 
 ## Customer Language
+
 **How they describe the problem:**
+
 - "[verbatim]"
-**How they describe us:**
+  **How they describe us:**
 - "[verbatim]"
-**Words to use:**
-**Words to avoid:**
-**Glossary:**
-| Term | Meaning |
-|------|---------|
-| | |
+  **Words to use:**
+  **Words to avoid:**
+  **Glossary:**
+  | Term | Meaning |
+  |------|---------|
+  | | |
 
 ## Brand Voice
+
 **Tone:**
 **Style:**
 **Personality:**
 
 ## Proof Points
+
 **Metrics:**
 **Customers:**
 **Testimonials:**
+
 > "[quote]" — [who]
-**Value themes:**
-| Theme | Proof |
-|-------|-------|
-| | |
+> **Value themes:**
+> | Theme | Proof |
+> |-------|-------|
+> | | |
 
 ## Goals
+
 **Business goal:**
 **Conversion action:**
 **Current metrics:**

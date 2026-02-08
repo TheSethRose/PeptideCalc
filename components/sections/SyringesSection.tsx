@@ -8,7 +8,10 @@ interface SyringesSectionProps {
   setSyringeConfig: React.Dispatch<React.SetStateAction<SyringeConfig>>;
 }
 
-export const SyringesSection: React.FC<SyringesSectionProps> = ({ syringeConfig, setSyringeConfig }) => (
+export const SyringesSection: React.FC<SyringesSectionProps> = ({
+  syringeConfig,
+  setSyringeConfig,
+}) => (
   <section>
     <div className="flex items-center gap-2 mb-3">
       <Syringe className="w-4 h-4" style={{ color: 'var(--purple)' }} />

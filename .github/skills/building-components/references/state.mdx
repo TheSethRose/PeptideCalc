@@ -73,9 +73,9 @@ type StepperProps = {
 
 export const Stepper = ({ value: controlledValue, defaultValue, onValueChange }: StepperProps) => {
   const [value, setValue] = useControllableState({
-    prop: controlledValue,        // The controlled value prop
-    defaultProp: defaultValue,    // Default value for uncontrolled mode
-    onChange: onValueChange,      // Called when value changes
+    prop: controlledValue, // The controlled value prop
+    defaultProp: defaultValue, // Default value for uncontrolled mode
+    onChange: onValueChange, // Called when value changes
   });
 
   return (
@@ -84,5 +84,5 @@ export const Stepper = ({ value: controlledValue, defaultValue, onValueChange }:
       <button onClick={() => setValue(value + 1)}>Increment</button>
     </div>
   );
-}
+};
 ```

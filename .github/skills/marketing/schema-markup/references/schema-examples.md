@@ -363,8 +363,8 @@ Combine multiple schema types using @graph.
 ```jsx
 export default function ProductPage({ product }) {
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
+    '@context': 'https://schema.org',
+    '@type': 'Product',
     name: product.name,
     // ... other properties
   };

@@ -60,20 +60,15 @@ clsx('base', isActive && 'active');
 
 // Object syntax
 clsx('base', {
-  'active': isActive,
-  'disabled': isDisabled,
+  active: isActive,
+  disabled: isDisabled,
 });
 
 // Arrays
 clsx(['base', isLarge ? 'text-lg' : 'text-sm']);
 
 // Mixed
-clsx(
-  'base',
-  ['array-item'],
-  { 'object-conditional': true },
-  isActive && 'conditional'
-);
+clsx('base', ['array-item'], { 'object-conditional': true }, isActive && 'conditional');
 ```
 
 A common pattern is to merge a default set of classes with incoming props, as well as any custom logic we have:
@@ -84,11 +79,7 @@ const Component = ({ className, ...props }: ComponentProps) => {
 
   return (
     <div
-      className={cn(
-        "rounded-lg border bg-white shadow-sm",
-        isOpen && "bg-blue-500",
-        className
-      )}
+      className={cn('rounded-lg border bg-white shadow-sm', isOpen && 'bg-blue-500', className)}
       {...props}
     />
   );
@@ -122,30 +113,28 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
         destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
         outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
+          'border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50',
+        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        ghost: 'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
+        link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-9",
+        default: 'h-9 px-4 py-2 has-[>svg]:px-3',
+        sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
+        lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
+        icon: 'size-9',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
-  }
-)
+  },
+);
 ```
 
 ## Best practices
@@ -153,6 +142,7 @@ const buttonVariants = cva(
 ### 1. Order matters
 
 Always apply classes in this order:
+
 1. Base styles (always applied)
 2. Variant styles (based on props)
 3. Conditional styles (based on state)
@@ -208,17 +198,19 @@ If you're migrating from a different styling approach, here's how to adapt commo
 ```tsx title="Before - CSS Modules"
 import styles from './Button.module.css';
 
-<button className={`${styles.button} ${styles[variant]} ${className}`} />
+<button className={`${styles.button} ${styles[variant]} ${className}`} />;
 ```
 
 ```tsx title="After - cn + Tailwind"
 import { cn } from '@/lib/utils';
 
-<button className={cn(
-  'px-4 py-2 rounded-lg',
-  variant === 'primary' && 'bg-blue-500 text-white',
-  className
-)} />
+<button
+  className={cn(
+    'px-4 py-2 rounded-lg',
+    variant === 'primary' && 'bg-blue-500 text-white',
+    className,
+  )}
+/>;
 ```
 
 ### From styled-components
@@ -226,7 +218,7 @@ import { cn } from '@/lib/utils';
 ```tsx title="Before - styled-components"
 const Button = styled.button<{ $primary?: boolean }>`
   padding: 8px 16px;
-  background: ${props => props.$primary ? 'blue' : 'gray'};
+  background: ${(props) => (props.$primary ? 'blue' : 'gray')};
 `;
 ```
 
@@ -234,11 +226,7 @@ const Button = styled.button<{ $primary?: boolean }>`
 function Button({ primary, className, ...props }) {
   return (
     <button
-      className={cn(
-        'px-4 py-2',
-        primary ? 'bg-blue-500' : 'bg-gray-500',
-        className
-      )}
+      className={cn('px-4 py-2', primary ? 'bg-blue-500' : 'bg-gray-500', className)}
       {...props}
     />
   );
@@ -255,12 +243,8 @@ Both `clsx` and `tailwind-merge` are highly optimized, but keep these tips in mi
 
 ```tsx
 const className = useMemo(
-  () => cn(
-    baseStyles,
-    expensiveComputation(props),
-    className
-  ),
-  [props, className]
+  () => cn(baseStyles, expensiveComputation(props), className),
+  [props, className],
 );
 ```
 

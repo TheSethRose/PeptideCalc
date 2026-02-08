@@ -39,20 +39,14 @@ export const StatCard: React.FC<StatCardProps> = ({
       >
         {label}
       </p>
-      <h3
-        className="text-2xl font-bold mt-1"
-        style={{ color: valueColor }}
-      >
+      <h3 className="text-2xl font-bold mt-1" style={{ color: valueColor }}>
         {value}
       </h3>
       <p className="text-xs mt-1" style={{ color: 'var(--muted-foreground)' }}>
         {subtitle}
       </p>
     </div>
-    <div
-      className="p-2 rounded-lg"
-      style={{ backgroundColor: iconBg, color: iconColor }}
-    >
+    <div className="p-2 rounded-lg" style={{ backgroundColor: iconBg, color: iconColor }}>
       {icon}
     </div>
   </div>

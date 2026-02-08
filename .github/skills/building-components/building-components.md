@@ -73,11 +73,13 @@ A component is a styled, reusable UI unit that adds visual design to primitives 
 Components are still relatively low-level but include styling, making them immediately usable in applications. They typically wrap unstyled primitives with default visual design while remaining customizable.
 
 Examples:
+
 - [shadcn/ui components](https://ui.shadcn.com/) (styled wrappers of Radix primitives)
 - [Material UI components](https://mui.com/components/)
 - [Ant Design components](https://ant.design/components/overview/)
 
 Expectations:
+
 - Clear props API; supports controlled and uncontrolled usage where applicable.
 - Includes default styling but remains override-friendly (classes, tokens, slots).
 - Fully keyboard accessible and screen-reader friendly (inherits from primitives).
@@ -89,12 +91,14 @@ Expectations:
 Patterns are a specific composition of primitives or components that are used to solve a specific UI/UX problem.
 
 Examples:
+
 - Form validation with inline errors
 - Confirming destructive actions
 - Typeahead search
 - Optimistic UI
 
 Expectations.
+
 - Describes behavior, a11y, keyboard map, and failure modes.
 - May include reference implementations in multiple frameworks.
 
@@ -103,6 +107,7 @@ Expectations.
 An opinionated, production-ready composition of components that solves a concrete interface use case (often product-specific) with content scaffolding. Blocks trade generality for speed of adoption.
 
 Examples:
+
 - Pricing table
 - Auth screens
 - Onboarding stepper
@@ -110,6 +115,7 @@ Examples:
 - Billing settings form
 
 Expectations.
+
 - Strong defaults, copy-paste friendly, easily branded/themed.
 - Minimal logic beyond layout and orchestration; domain logic is stubbed via handlers.
 - Accepts data via props; never hides data behind fetches without a documented adapter.
@@ -121,11 +127,13 @@ Expectations.
 A complete, single-route view composed of multiple blocks arranged to serve a specific user-facing purpose. Pages combine blocks into a cohesive layout that represents one destination in an application.
 
 Examples:
+
 - Landing page (hero block + features block + pricing block + footer block)
 - Product detail page (image gallery block + product info block + reviews block)
 - Dashboard page (stats block + chart block + activity feed block)
 
 Expectations:
+
 - Combines multiple blocks into a unified layout for a single route.
 - Focuses on layout and block orchestration rather than component-level details.
 - May include page-specific logic for data coordination between blocks.
@@ -136,12 +144,14 @@ Expectations:
 A multi-page collection or full-site scaffold that bundles pages, routing configuration, shared layouts, global providers, and project structure. Templates are complete starting points for entire applications or major application sections.
 
 Examples:
+
 - [TailwindCSS Templates](https://tailwindui.com/templates)
 - [shadcnblocks Templates](https://www.shadcnblocks.com/templates) (full application shells)
 - "SaaS starter" (auth pages + dashboard pages + settings pages + marketing pages)
 - "E-commerce template" (storefront + product pages + checkout flow + admin pages)
 
 Expectations:
+
 - Includes multiple pages with routing/navigation structure.
 - Provides global configuration (theme providers, auth context, layout shells).
 - Opinionated project structure with clear conventions.
@@ -153,12 +163,14 @@ Expectations:
 A helper exported for developer ergonomics or composition; not rendered UI.
 
 Examples:
+
 - React hooks (useControllableState, useId)
 - Class utilities
 - Keybinding helpers
 - Focus scopes
 
 Expectations.
+
 - Side-effect free (except where explicitly documented).
 - Testable in isolation; supports tree-shaking.
 
@@ -171,6 +183,7 @@ The public configuration surface of a component. Props are stable, typed, and do
 ### 2.2 Children / Slots
 
 Placeholders for caller-provided structure or content.
+
 - Children (implicit slot). JSX between opening/closing tags.
 - Named slots. Props like icon, footer, or `<Component.Slot>` subcomponents.
 - Slot forwarding. Passing DOM attributes/className/refs through to the underlying element.
@@ -181,9 +194,7 @@ A function child used to delegate rendering while the parent supplies state/data
 
 ```tsx
 <ParentComponent data={data}>
-  {(item) => (
-    <ChildComponent key={item.id} {...item} />
-  )}
+  {(item) => <ChildComponent key={item.id} {...item} />}
 </ParentComponent>
 ```
 
@@ -364,7 +375,7 @@ Every interactive element must be keyboard accessible. Users should be able to n
 // ✅ Complete keyboard support
 function Menu() {
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    switch(e.key) {
+    switch (e.key) {
       case 'ArrowDown':
         focusNextItem();
         break;
@@ -549,7 +560,7 @@ function Modal({ isOpen, onClose, children }) {
 
       // Focus first focusable element in modal
       const firstFocusable = modalRef.current?.querySelector<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       );
       firstFocusable?.focus();
 
@@ -574,7 +585,7 @@ function Modal({ isOpen, onClose, children }) {
     if (e.key === 'Tab') {
       // Trap focus within modal
       const focusables = modalRef.current?.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       );
 
       if (focusables && focusables.length > 0) {
@@ -603,11 +614,7 @@ function Modal({ isOpen, onClose, children }) {
       onKeyDown={handleKeyDown}
       className="modal"
     >
-      <button
-        onClick={onClose}
-        aria-label="Close dialog"
-        className="close-button"
-      >
+      <button onClick={onClose} aria-label="Close dialog" className="close-button">
         ×
       </button>
       {children}
@@ -627,25 +634,21 @@ function DropdownMenu({ items }) {
   const menuRef = useRef<HTMLUListElement>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    switch(e.key) {
+    switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
         if (!isOpen) {
           setIsOpen(true);
           setSelectedIndex(0);
         } else {
-          setSelectedIndex(prev =>
-            prev < items.length - 1 ? prev + 1 : 0
-          );
+          setSelectedIndex((prev) => (prev < items.length - 1 ? prev + 1 : 0));
         }
         break;
 
       case 'ArrowUp':
         e.preventDefault();
         if (isOpen) {
-          setSelectedIndex(prev =>
-            prev > 0 ? prev - 1 : items.length - 1
-          );
+          setSelectedIndex((prev) => (prev > 0 ? prev - 1 : items.length - 1));
         }
         break;
 
@@ -680,12 +683,7 @@ function DropdownMenu({ items }) {
       </button>
 
       {isOpen && (
-        <ul
-          id="dropdown-menu"
-          role="menu"
-          ref={menuRef}
-          onKeyDown={handleKeyDown}
-        >
+        <ul id="dropdown-menu" role="menu" ref={menuRef} onKeyDown={handleKeyDown}>
           {items.map((item, index) => (
             <li
               key={item.id}
@@ -718,7 +716,7 @@ function Tabs({ tabs, defaultTab = 0 }) {
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
     let newIndex = index;
 
-    switch(e.key) {
+    switch (e.key) {
       case 'ArrowLeft':
         newIndex = index > 0 ? index - 1 : tabs.length - 1;
         break;
@@ -799,7 +797,7 @@ function AccessibleForm() {
           type="email"
           aria-required="true"
           aria-invalid={!!errors.email}
-          aria-describedby={errors.email ? "email-error" : "email-help"}
+          aria-describedby={errors.email ? 'email-error' : 'email-help'}
         />
         <span id="email-help" className="help-text">
           We'll never share your email
@@ -814,21 +812,11 @@ function AccessibleForm() {
       <fieldset>
         <legend>Notification Preferences</legend>
         <div>
-          <input
-            id="notify-email"
-            type="checkbox"
-            name="notifications"
-            value="email"
-          />
+          <input id="notify-email" type="checkbox" name="notifications" value="email" />
           <label htmlFor="notify-email">Email notifications</label>
         </div>
         <div>
-          <input
-            id="notify-sms"
-            type="checkbox"
-            name="notifications"
-            value="sms"
-          />
+          <input id="notify-sms" type="checkbox" name="notifications" value="sms" />
           <label htmlFor="notify-sms">SMS notifications</label>
         </div>
       </fieldset>
@@ -961,13 +949,8 @@ function ProgressBar({ value, max = 100 }) {
       aria-valuemax={max}
       aria-label="Upload progress"
     >
-      <div
-        className="progress-fill"
-        style={{ width: `${(value / max) * 100}%` }}
-      />
-      <span className="sr-only">
-        {Math.round((value / max) * 100)}% complete
-      </span>
+      <div className="progress-fill" style={{ width: `${(value / max) * 100}%` }} />
+      <span className="sr-only">{Math.round((value / max) * 100)}% complete</span>
     </div>
   );
 }
@@ -1062,10 +1045,13 @@ Allow users to zoom:
 
 ```html
 <!-- ✅ Allows zooming -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!-- ❌ Prevents zooming -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+/>
 ```
 
 ## Common Pitfalls
@@ -1149,7 +1135,6 @@ Instead of cramming all functionality into a single component with dozens of pro
 
 Fernando gave a great talk about this at React Universe Conf 2025, where he shared his approach to rebuilding Slack's Message Composer as a composable component.
 
-
 ## Making a component composable
 
 To make a component composable, you need to break it down into smaller, more focused components. For example, let's take this Accordion component:
@@ -1172,9 +1157,7 @@ const data = [
   },
 ];
 
-return (
-  <Accordion data={data} />
-);
+return <Accordion data={data} />;
 ```
 
 While this Accordion component might seem simple, it's handling too many responsibilities. It's responsible for rendering the container, trigger and content; as well as handling the accordion state and data.
@@ -1209,12 +1192,7 @@ export type AccordionRootProps = React.ComponentProps<'div'> & {
   setOpen: (open: boolean) => void;
 };
 
-export const Root = ({
-  children,
-  open,
-  setOpen,
-  ...props
-}: AccordionRootProps) => (
+export const Root = ({ children, open, setOpen, ...props }: AccordionRootProps) => (
   <AccordionContext.Provider value={{ open, setOpen }}>
     <div {...props}>{children}</div>
   </AccordionContext.Provider>
@@ -1249,9 +1227,7 @@ export type AccordionTriggerProps = React.ComponentProps<'button'> & {
 
 export const Trigger = ({ asChild, ...props }: AccordionTriggerProps) => (
   <AccordionContext.Consumer>
-    {({ open, setOpen }) => (
-      <button onClick={() => setOpen(!open)} {...props} />
-    )}
+    {({ open, setOpen }) => <button onClick={() => setOpen(!open)} {...props} />}
   </AccordionContext.Consumer>
 );
 ```
@@ -1271,9 +1247,7 @@ export type AccordionContentProps = React.ComponentProps<'div'> & {
 };
 
 export const Content = ({ asChild, ...props }: AccordionContentProps) => (
-  <AccordionContext.Consumer>
-    {({ open }) => <div {...props} />}
-  </AccordionContext.Consumer>
+  <AccordionContext.Consumer>{({ open }) => <div {...props} />}</AccordionContext.Consumer>
 );
 ```
 
@@ -1392,6 +1366,7 @@ At its core, `asChild` changes how a component renders. When set to `true`, inst
 ```
 
 This renders nested elements:
+
 ```html
 <button data-state="closed">
   <button>Open Dialog</button>
@@ -1407,6 +1382,7 @@ This renders nested elements:
 ```
 
 This renders a single, merged element:
+
 ```html
 <button data-state="closed">Open Dialog</button>
 ```
@@ -1429,7 +1405,7 @@ function Component({ asChild, children, ...props }) {
       onClick: (e) => {
         props.onClick?.(e);
         children.props.onClick?.(e);
-      }
+      },
     });
   }
 
@@ -1439,6 +1415,7 @@ function Component({ asChild, children, ...props }) {
 ```
 
 The component:
+
 1. Checks if `asChild` is true
 2. Clones the child element
 3. Merges props from both parent and child
@@ -1500,7 +1477,7 @@ import { Button } from '@/components/ui/button';
   <Button variant="outline" size="icon">
     <MoreVertical className="h-4 w-4" />
   </Button>
-</DropdownMenu.Trigger>
+</DropdownMenu.Trigger>;
 ```
 
 Your Button component receives all the necessary dropdown trigger behavior without modification.
@@ -1512,9 +1489,7 @@ You can compose multiple behaviors onto a single element:
 ```tsx
 <Dialog.Trigger asChild>
   <Tooltip.Trigger asChild>
-    <button>
-      Open dialog (with tooltip)
-    </button>
+    <button>Open dialog (with tooltip)</button>
   </Tooltip.Trigger>
 </Dialog.Trigger>
 ```
@@ -1566,17 +1541,12 @@ Integrate with form libraries while preserving functionality:
   render={({ field }) => (
     <FormItem>
       <Checkbox.Root asChild>
-        <input
-          type="checkbox"
-          {...field}
-          className="sr-only"
-        />
+        <input type="checkbox" {...field} className="sr-only" />
       </Checkbox.Root>
     </FormItem>
   )}
 />
 ```
-
 
 ## Best Practices
 
@@ -1626,7 +1596,7 @@ const TestButton = (props) => {
 
 <Tooltip.Trigger asChild>
   <TestButton>Test</TestButton>
-</Tooltip.Trigger>
+</Tooltip.Trigger>;
 ```
 
 ### 4. Handle Edge Cases
@@ -1636,11 +1606,7 @@ Consider edge cases like conditional rendering:
 ```tsx
 // Handle conditional children
 <Dialog.Trigger asChild>
-  {isLoading ? (
-    <Skeleton className="h-10 w-20" />
-  ) : (
-    <Button>Open Dialog</Button>
-  )}
+  {isLoading ? <Skeleton className="h-10 w-20" /> : <Button>Open Dialog</Button>}
 </Dialog.Trigger>
 ```
 
@@ -1655,9 +1621,7 @@ As discussed in [Types](#types), you should always spread props to the underlyin
 const BadButton = ({ children }) => <button>{children}</button>;
 
 // ✅ Properly receives all props
-const GoodButton = ({ children, ...props }) => (
-  <button {...props}>{children}</button>
-);
+const GoodButton = ({ children, ...props }) => <button {...props}>{children}</button>;
 ```
 
 ### Multiple Children
@@ -1737,6 +1701,7 @@ For example:
 ```
 
 This renders different HTML elements:
+
 ```html
 <!-- Default -->
 <div>Content</div>
@@ -1758,11 +1723,7 @@ The `as` prop implementation uses dynamic component rendering:
 
 ```tsx
 // Simplified implementation
-function Component({
-  as: Element = 'div',
-  children,
-  ...props
-}) {
+function Component({ as: Element = 'div', children, ...props }) {
   return <Element {...props}>{children}</Element>;
 }
 
@@ -1783,6 +1744,7 @@ function Component<E extends React.ElementType = 'div'>({
 ```
 
 The component:
+
 1. Accepts an `as` prop with a default element type
 2. Uses the provided element or fallback to default
 3. Spreads all other props to the rendered element
@@ -1801,39 +1763,35 @@ npm install @radix-ui/react-slot
 The `asChild` pattern uses a boolean prop instead of specifying the element type:
 
 ```tsx
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
+import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'class-variance-authority';
 
-const itemVariants = cva(
-  "rounded-lg border p-4",
-  {
-    variants: {
-      variant: {
-        default: "bg-white",
-        primary: "bg-blue-500 text-white",
-      },
-      size: {
-        default: "h-10 px-4",
-        sm: "h-8 px-3",
-        lg: "h-12 px-6",
-      },
+const itemVariants = cva('rounded-lg border p-4', {
+  variants: {
+    variant: {
+      default: 'bg-white',
+      primary: 'bg-blue-500 text-white',
     },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
+    size: {
+      default: 'h-10 px-4',
+      sm: 'h-8 px-3',
+      lg: 'h-12 px-6',
     },
-  }
-)
+  },
+  defaultVariants: {
+    variant: 'default',
+    size: 'default',
+  },
+});
 
 function Item({
   className,
-  variant = "default",
-  size = "default",
+  variant = 'default',
+  size = 'default',
   asChild = false,
   ...props
-}: React.ComponentProps<"div"> &
-  VariantProps<typeof itemVariants> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot : "div"
+}: React.ComponentProps<'div'> & VariantProps<typeof itemVariants> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot : 'div';
   return (
     <Comp
       data-slot="item"
@@ -1842,7 +1800,7 @@ function Item({
       className={cn(itemVariants({ variant, size, className }))}
       {...props}
     />
-  )
+  );
 }
 ```
 
@@ -1859,6 +1817,7 @@ Now you can use it in two ways:
 ```
 
 The `Slot` component:
+
 1. Clones the child element
 2. Merges the component's props (className, data attributes, etc.) with the child's props
 3. Forwards refs correctly
@@ -1867,6 +1826,7 @@ The `Slot` component:
 ### Comparison: `as` vs `asChild`
 
 **`as` prop (manual implementation):**
+
 ```tsx
 // Explicit element type
 <Button as="a" href="/home">Link Button</Button>
@@ -1877,6 +1837,7 @@ The `Slot` component:
 ```
 
 **`asChild` with Slot:**
+
 ```tsx
 // Implicit from child
 <Button asChild>
@@ -1894,25 +1855,27 @@ The `Slot` component:
 
 **Key differences:**
 
-| Feature | `as` prop | `asChild` + Slot |
-|---------|-----------|------------------|
-| **API Style** | `<Button as="a">` | `<Button asChild><a /></Button>` |
-| **Element Type** | Specified in prop | Inferred from child |
-| **Component Composition** | Limited | Full support |
-| **Prop Merging** | Basic spread | Intelligent merging |
-| **Ref Forwarding** | Manual setup needed | Built-in |
-| **Event Handlers** | May conflict | Composed correctly |
-| **Library Size** | No dependency | Requires `@radix-ui/react-slot` |
+| Feature                   | `as` prop           | `asChild` + Slot                 |
+| ------------------------- | ------------------- | -------------------------------- |
+| **API Style**             | `<Button as="a">`   | `<Button asChild><a /></Button>` |
+| **Element Type**          | Specified in prop   | Inferred from child              |
+| **Component Composition** | Limited             | Full support                     |
+| **Prop Merging**          | Basic spread        | Intelligent merging              |
+| **Ref Forwarding**        | Manual setup needed | Built-in                         |
+| **Event Handlers**        | May conflict        | Composed correctly               |
+| **Library Size**          | No dependency       | Requires `@radix-ui/react-slot`  |
 
 ### When to Use Each Approach
 
 **Use `as` prop when:**
+
 - You want a simpler API surface
 - You're primarily switching between HTML elements
 - You want to avoid additional dependencies
 - The component is simple and doesn't need complex prop merging
 
 **Use `asChild` + Slot when:**
+
 - You need to compose with other components
 - You want automatic prop merging behavior
 - You're building a component library similar to Radix UI or shadcn/ui
@@ -2077,13 +2040,9 @@ function Clickable({ as: Element = 'button', ...props }) {
 Create fully type-safe polymorphic components:
 
 ```tsx
-type PolymorphicRef<E extends React.ElementType> =
-  React.ComponentPropsWithRef<E>['ref'];
+type PolymorphicRef<E extends React.ElementType> = React.ComponentPropsWithRef<E>['ref'];
 
-type PolymorphicProps<
-  E extends React.ElementType,
-  Props = {}
-> = Props &
+type PolymorphicProps<E extends React.ElementType, Props = {}> = Props &
   Omit<React.ComponentPropsWithoutRef<E>, keyof Props> & {
     as?: E;
   };
@@ -2135,12 +2094,12 @@ Choose meaningful defaults that represent the most common use case:
 
 ```tsx
 // ✅ Good defaults
-function Article({ as: Element = 'article', ...props }) { }
-function Navigation({ as: Element = 'nav', ...props }) { }
-function Heading({ as: Element = 'h2', ...props }) { }
+function Article({ as: Element = 'article', ...props }) {}
+function Navigation({ as: Element = 'nav', ...props }) {}
+function Heading({ as: Element = 'h2', ...props }) {}
 
 // ❌ Too generic
-function Component({ as: Element = 'div', ...props }) { }
+function Component({ as: Element = 'div', ...props }) {}
 ```
 
 ### 2. Document Valid Elements
@@ -2165,9 +2124,7 @@ Warn when inappropriate elements are used:
 ```tsx
 function Button({ as: Element = 'button', ...props }) {
   if (__DEV__ && Element === 'div' && !props.role) {
-    console.warn(
-      'Button: When using as="div", provide role="button" for accessibility'
-    );
+    console.warn('Button: When using as="div", provide role="button" for accessibility');
   }
 
   return <Element {...props} />;
@@ -2246,10 +2203,7 @@ function Component({ as: Element = 'div', ...props }: any) {
 }
 
 // ✅ Type safe
-function Component<E extends React.ElementType = 'div'>({
-  as,
-  ...props
-}: PolymorphicProps<E>) {
+function Component<E extends React.ElementType = 'div'>({ as, ...props }: PolymorphicProps<E>) {
   const Element = as || 'div';
   return <Element {...props} />;
 }
@@ -2294,14 +2248,13 @@ const Card = ({ title, description, footer, ...props }) => (
       <h2>{title}</h2>
       <p>{description}</p>
     </div>
-    <div className="card-footer">
-      {footer}
-    </div>
+    <div className="card-footer">{footer}</div>
   </div>
 );
 ```
 
 As we discussed in [Composition](#composition), this approach creates several problems:
+
 - You can't customize the header styling without adding more props
 - You can't control the HTML elements used for title and description
 - You're forced into a specific DOM structure
@@ -2309,6 +2262,7 @@ As we discussed in [Composition](#composition), this approach creates several pr
 Instead, each layer should be its own component. This allows you to customize each layer independently, and to control the exact HTML elements used for the title and description.
 
 The benefits of this approach are:
+
 - **Maximum customization** - Users can style and modify each layer independently
 - **No prop drilling** - Props go directly to the element that needs them
 - **Semantic HTML** - Users can see and control the exact DOM structure
@@ -2327,9 +2281,7 @@ export type CardRootProps = React.ComponentProps<'div'> & {
   variant?: 'default' | 'outlined';
 };
 
-export const CardRoot = ({ variant = 'default', ...props }: CardRootProps) => (
-  <div {...props} />
-);
+export const CardRoot = ({ variant = 'default', ...props }: CardRootProps) => <div {...props} />;
 ```
 
 ### Common HTML Attribute Types
@@ -2378,9 +2330,7 @@ import type { ComponentProps } from 'react';
 
 export type ShareButtonProps = ComponentProps<'button'>;
 
-export const ShareButton = (props: ShareButtonProps) => (
-  <button {...props} />
-);
+export const ShareButton = (props: ShareButtonProps) => <button {...props} />;
 ```
 
 ## Exporting Types
@@ -2536,9 +2486,9 @@ type StepperProps = {
 
 export const Stepper = ({ value: controlledValue, defaultValue, onValueChange }: StepperProps) => {
   const [value, setValue] = useControllableState({
-    prop: controlledValue,        // The controlled value prop
-    defaultProp: defaultValue,    // Default value for uncontrolled mode
-    onChange: onValueChange,      // Called when value changes
+    prop: controlledValue, // The controlled value prop
+    defaultProp: defaultValue, // Default value for uncontrolled mode
+    onChange: onValueChange, // Called when value changes
   });
 
   return (
@@ -2547,7 +2497,7 @@ export const Stepper = ({ value: controlledValue, defaultValue, onValueChange }:
       <button onClick={() => setValue(value + 1)}>Increment</button>
     </div>
   );
-}
+};
 ```
 
 ---
@@ -2569,13 +2519,14 @@ In less modern components, you'll often see APIs like this:
   openClassName="bg-black"
   closedClassName="bg-white"
   classes={{
-    open: "opacity-100",
-    closed: "opacity-0"
+    open: 'opacity-100',
+    closed: 'opacity-0',
   }}
 />
 ```
 
 This approach has several problems:
+
 - It couples the component's internal state to its styling API
 - It creates an explosion of props as components grow more complex
 - It makes the component harder to use and maintain
@@ -2650,7 +2601,7 @@ Tailwind supports arbitrary variants, making data attribute styling elegant:
     'data-[state=open]:animate-in data-[state=open]:fade-in',
     'data-[state=closed]:animate-out data-[state=closed]:fade-out',
     // Multiple attributes
-    'data-[state=open][data-side=top]:slide-in-from-top-2'
+    'data-[state=open][data-side=top]:slide-in-from-top-2',
   )}
 />
 ```
@@ -2665,10 +2616,10 @@ module.exports = {
         open: 'state="open"',
         closed: 'state="closed"',
         active: 'state="active"',
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 ```
 
 Now you can use shorthand:
@@ -2691,10 +2642,11 @@ import * as Dialog from '@radix-ui/react-dialog';
     <Dialog.Overlay className="data-[state=open]:animate-in data-[state=closed]:animate-out" />
     <Dialog.Content className="data-[state=open]:fade-in data-[state=closed]:fade-out" />
   </Dialog.Portal>
-</Dialog.Root>
+</Dialog.Root>;
 ```
 
 Other data attributes Radix provides include:
+
 - `data-state` - open/closed, active/inactive, on/off
 - `data-side` - top/right/bottom/left (for positioned elements)
 - `data-align` - start/center/end (for positioned elements)
@@ -2729,16 +2681,16 @@ Traditional approaches to styling child components have significant limitations:
 Use `data-slot` to give components stable identifiers that can be targeted by parents:
 
 ```tsx
-function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
+function FieldSet({ className, ...props }: React.ComponentProps<'fieldset'>) {
   return (
     <fieldset
       data-slot="field-set"
       className={cn(
-        "flex flex-col gap-6",
+        'flex flex-col gap-6',
         // Target specific child slots
-        "has-[>[data-slot=checkbox-group]]:gap-3",
-        "has-[>[data-slot=radio-group]]:gap-3",
-        className
+        'has-[>[data-slot=checkbox-group]]:gap-3',
+        'has-[>[data-slot=radio-group]]:gap-3',
+        className,
       )}
       {...props}
     />
@@ -2747,13 +2699,9 @@ function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
 ```
 
 ```tsx
-function CheckboxGroup({ className, ...props }: React.ComponentProps<"div">) {
+function CheckboxGroup({ className, ...props }: React.ComponentProps<'div'>) {
   return (
-    <div
-      data-slot="checkbox-group"
-      className={cn("flex flex-col gap-2", className)}
-      {...props}
-    />
+    <div data-slot="checkbox-group" className={cn('flex flex-col gap-2', className)} {...props} />
   );
 }
 ```
@@ -2771,18 +2719,18 @@ function CheckboxGroup({ className, ...props }: React.ComponentProps<"div">) {
 Tailwind's `has-[]` selector combined with `data-slot` creates powerful parent-aware styling:
 
 ```tsx
-function Form({ className, ...props }: React.ComponentProps<"form">) {
+function Form({ className, ...props }: React.ComponentProps<'form'>) {
   return (
     <form
       data-slot="form"
       className={cn(
-        "space-y-4",
+        'space-y-4',
         // Adjust spacing when specific slots are present
-        "has-[>[data-slot=form-section]]:space-y-6",
-        "has-[>[data-slot=inline-fields]]:space-y-2",
+        'has-[>[data-slot=form-section]]:space-y-6',
+        'has-[>[data-slot=inline-fields]]:space-y-2',
         // Style based on slot states
-        "has-[[data-slot=submit-button][data-loading=true]]:opacity-50",
-        className
+        'has-[[data-slot=submit-button][data-loading=true]]:opacity-50',
+        className,
       )}
       {...props}
     />
@@ -2795,18 +2743,18 @@ function Form({ className, ...props }: React.ComponentProps<"form">) {
 For deeper nesting, use the `[&_selector]` pattern to target any descendant:
 
 ```tsx
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+function Card({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card"
       className={cn(
-        "rounded-lg border p-4",
+        'rounded-lg border p-4',
         // Target any descendant with data-slot
-        "[&_[data-slot=card-header]]:mb-4",
-        "[&_[data-slot=card-title]]:text-lg [&_[data-slot=card-title]]:font-semibold",
-        "[&_[data-slot=card-description]]:text-sm [&_[data-slot=card-description]]:text-muted-foreground",
-        "[&_[data-slot=card-footer]]:mt-4 [&_[data-slot=card-footer]]:border-t [&_[data-slot=card-footer]]:pt-4",
-        className
+        '[&_[data-slot=card-header]]:mb-4',
+        '[&_[data-slot=card-title]]:text-lg [&_[data-slot=card-title]]:font-semibold',
+        '[&_[data-slot=card-description]]:text-sm [&_[data-slot=card-description]]:text-muted-foreground',
+        '[&_[data-slot=card-footer]]:mt-4 [&_[data-slot=card-footer]]:border-t [&_[data-slot=card-footer]]:pt-4',
+        className,
       )}
       {...props}
     />
@@ -2820,22 +2768,22 @@ Data slots work beautifully with global CSS for theme-wide consistency:
 
 ```css
 /* Style all buttons within forms */
-[data-slot="form"] [data-slot="button"] {
+[data-slot='form'] [data-slot='button'] {
   @apply w-full sm:w-auto;
 }
 
 /* Style submit buttons specifically */
-[data-slot="form"] [data-slot="submit-button"] {
+[data-slot='form'] [data-slot='submit-button'] {
   @apply bg-primary text-primary-foreground;
 }
 
 /* Adjust inputs within inline layouts */
-[data-slot="inline-fields"] [data-slot="input"] {
+[data-slot='inline-fields'] [data-slot='input'] {
   @apply flex-1;
 }
 
 /* Style based on state combinations */
-[data-slot="dialog"][data-state="open"] [data-slot="dialog-content"] {
+[data-slot='dialog'][data-state='open'] [data-slot='dialog-content'] {
   @apply animate-in fade-in;
 }
 ```
@@ -2869,17 +2817,20 @@ data-slot="mainContent"     // Use camelCase
 Understanding when to use each pattern is key to a clean API:
 
 ### `data-state` use cases
+
 - **Visual states** - open/closed, active/inactive, loading, etc.
 - **Layout states** - orientation, side, alignment
 - **Interaction states** - hover, focus, disabled (when you need to style children)
 
 ### `data-slot` use cases
+
 - **Component identification** - Stable identifiers for targeting
 - **Composition patterns** - Parent-child relationships
 - **Global styling** - Theme-wide component styling
 - **Variant-independent targeting** - Target any variant of a component
 
 ### `props` use cases
+
 - **Variants** - Different visual designs (primary, secondary, destructive)
 - **Sizes** - sm, md, lg
 - **Behavioral configuration** - controlled/uncontrolled, default values
@@ -2918,7 +2869,7 @@ const Button = ({
         // Variant styles via props
         buttonVariants({ variant, size }),
         // Additional state styling allowed via className
-        className
+        className,
       )}
       disabled={disabled}
       {...props}
@@ -2971,8 +2922,8 @@ Traditional CSS approaches often couple color values directly to their usage con
 Let's examine how we can structure our CSS variables to create this flexible system:
 
 ```css
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -3070,20 +3021,15 @@ clsx('base', isActive && 'active');
 
 // Object syntax
 clsx('base', {
-  'active': isActive,
-  'disabled': isDisabled,
+  active: isActive,
+  disabled: isDisabled,
 });
 
 // Arrays
 clsx(['base', isLarge ? 'text-lg' : 'text-sm']);
 
 // Mixed
-clsx(
-  'base',
-  ['array-item'],
-  { 'object-conditional': true },
-  isActive && 'conditional'
-);
+clsx('base', ['array-item'], { 'object-conditional': true }, isActive && 'conditional');
 ```
 
 A common pattern is to merge a default set of classes with incoming props, as well as any custom logic we have:
@@ -3094,11 +3040,7 @@ const Component = ({ className, ...props }: ComponentProps) => {
 
   return (
     <div
-      className={cn(
-        "rounded-lg border bg-white shadow-sm",
-        isOpen && "bg-blue-500",
-        className
-      )}
+      className={cn('rounded-lg border bg-white shadow-sm', isOpen && 'bg-blue-500', className)}
       {...props}
     />
   );
@@ -3132,30 +3074,28 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
         destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
         outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
+          'border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50',
+        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        ghost: 'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
+        link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-9",
+        default: 'h-9 px-4 py-2 has-[>svg]:px-3',
+        sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
+        lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
+        icon: 'size-9',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
-  }
-)
+  },
+);
 ```
 
 ## Best practices
@@ -3163,6 +3103,7 @@ const buttonVariants = cva(
 ### 1. Order matters
 
 Always apply classes in this order:
+
 1. Base styles (always applied)
 2. Variant styles (based on props)
 3. Conditional styles (based on state)
@@ -3219,18 +3160,20 @@ If you're migrating from a different styling approach, here's how to adapt commo
 // Before - CSS Modules
 import styles from './Button.module.css';
 
-<button className={`${styles.button} ${styles[variant]} ${className}`} />
+<button className={`${styles.button} ${styles[variant]} ${className}`} />;
 ```
 
 ```tsx
 // After - cn + Tailwind
 import { cn } from '@/lib/utils';
 
-<button className={cn(
-  'px-4 py-2 rounded-lg',
-  variant === 'primary' && 'bg-blue-500 text-white',
-  className
-)} />
+<button
+  className={cn(
+    'px-4 py-2 rounded-lg',
+    variant === 'primary' && 'bg-blue-500 text-white',
+    className,
+  )}
+/>;
 ```
 
 ### From styled-components
@@ -3239,7 +3182,7 @@ import { cn } from '@/lib/utils';
 // Before - styled-components
 const Button = styled.button<{ $primary?: boolean }>`
   padding: 8px 16px;
-  background: ${props => props.$primary ? 'blue' : 'gray'};
+  background: ${(props) => (props.$primary ? 'blue' : 'gray')};
 `;
 ```
 
@@ -3248,11 +3191,7 @@ const Button = styled.button<{ $primary?: boolean }>`
 function Button({ primary, className, ...props }) {
   return (
     <button
-      className={cn(
-        'px-4 py-2',
-        primary ? 'bg-blue-500' : 'bg-gray-500',
-        className
-      )}
+      className={cn('px-4 py-2', primary ? 'bg-blue-500' : 'bg-gray-500', className)}
       {...props}
     />
   );
@@ -3269,12 +3208,8 @@ Both `clsx` and `tailwind-merge` are highly optimized, but keep these tips in mi
 
 ```tsx
 const className = useMemo(
-  () => cn(
-    baseStyles,
-    expensiveComputation(props),
-    className
-  ),
-  [props, className]
+  () => cn(baseStyles, expensiveComputation(props), className),
+  [props, className],
 );
 ```
 
@@ -3368,7 +3303,6 @@ From the perspective of component users, registries greatly improve the discover
 Before integrating a component, users can preview it in action, experiment with different variants, and review its behavior and code quality. This ability to evaluate components beforehand reduces risk and increases confidence in adoption.
 
 Perhaps most importantly, registries empower users with true ownership. Instead of being locked into a dependency, users copy the source code directly into their projects. This means they can modify components as needed, avoid dependency management headaches, and retain full control over their codebase.
-
 
 ## Creating a Registry
 
@@ -3478,7 +3412,7 @@ npm install @acme/ui-components
 ```
 
 ```tsx
-import { Button } from '@acme/ui-components'
+import { Button } from '@acme/ui-components';
 
 // Component is imported from node_modules
 // Source code is not directly editable
@@ -3550,11 +3484,7 @@ This creates a dependency relationship where users must rely on the package main
 Tweaking components requires working within the exposed API. While you can provide props for customization:
 
 ```tsx
-<Button
-  variant="primary"
-  size="large"
-  className="custom-styles"
-/>
+<Button variant="primary" size="large" className="custom-styles" />
 ```
 
 Users cannot fundamentally alter how the component works without forking the entire package.
@@ -3572,7 +3502,7 @@ By default, Tailwind only generates styles for classes it finds in your project 
 To fix this, users need to add a `@source` directive to their Tailwind configuration, telling it to scan your package for class names:
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Tell Tailwind to look for classes in your package */
 @source "../node_modules/@acme/ui-components";
@@ -3600,9 +3530,7 @@ To publish your components to npm, you need a properly configured `package.json`
     },
     "./styles.css": "./dist/styles.css"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsup",
     "prepublishOnly": "npm run build"

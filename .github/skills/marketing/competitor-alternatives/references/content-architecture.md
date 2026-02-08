@@ -23,19 +23,19 @@ Per competitor, document:
 ```yaml
 name: Notion
 website: notion.so
-tagline: "The all-in-one workspace"
+tagline: 'The all-in-one workspace'
 founded: 2016
 headquarters: San Francisco
 
 # Positioning
-primary_use_case: "docs + light databases"
-target_audience: "teams wanting flexible workspace"
-market_position: "premium, feature-rich"
+primary_use_case: 'docs + light databases'
+target_audience: 'teams wanting flexible workspace'
+market_position: 'premium, feature-rich'
 
 # Pricing
 pricing_model: per-seat
 free_tier: true
-free_tier_limits: "limited blocks, 1 user"
+free_tier_limits: 'limited blocks, 1 user'
 starter_price: $8/user/month
 business_price: $15/user/month
 enterprise: custom
@@ -81,17 +81,17 @@ not_ideal_for:
 
 # Common complaints (from reviews)
 common_complaints:
-  - "Gets slow with lots of content"
-  - "Hard to find things as workspace grows"
-  - "Mobile app is clunky"
+  - 'Gets slow with lots of content'
+  - 'Hard to find things as workspace grows'
+  - 'Mobile app is clunky'
 
 # Migration notes
 migration_from:
   difficulty: medium
-  data_export: "Markdown, CSV, HTML"
-  what_transfers: "Pages, databases"
-  what_doesnt: "Automations, integrations setup"
-  time_estimate: "1-3 days for small team"
+  data_export: 'Markdown, CSV, HTML'
+  what_transfers: 'Pages, databases'
+  what_doesnt: 'Automations, integrations setup'
+  time_estimate: '1-3 days for small team'
 ```
 
 ---
@@ -129,6 +129,7 @@ Each page pulls from centralized data:
 - **[A] vs [B] page**: Pulls both competitor data + your data
 
 **Benefits**:
+
 - Update competitor pricing once, updates everywhere
 - Add new feature comparison once, appears on all pages
 - Consistent accuracy across pages
@@ -145,6 +146,7 @@ Each page pulls from centralized data:
 **Purpose**: Lists all "[Competitor] Alternative" pages
 
 **Page structure**:
+
 1. Headline: "[Your Product] as an Alternative"
 2. Brief intro on why people switch to you
 3. List of all alternative pages with:
@@ -155,6 +157,7 @@ Each page pulls from centralized data:
 5. CTA
 
 **Example**:
+
 ```markdown
 ## Explore [Your Product] as an Alternative
 
@@ -174,6 +177,7 @@ Looking to switch? See how [Your Product] compares to the tools you're evaluatin
 **Purpose**: Lists all "You vs [Competitor]" and "[A] vs [B]" pages
 
 **Page structure**:
+
 1. Headline: "Compare [Your Product]"
 2. Section: "[Your Product] vs Competitors" — list of direct comparisons
 3. Section: "Head-to-Head Comparisons" — list of [A] vs [B] pages
@@ -187,22 +191,26 @@ Looking to switch? See how [Your Product] compares to the tools you're evaluatin
 **Keep them updated**: When you add a new comparison page, add it to the relevant index.
 
 **Internal linking**:
+
 - Link from index → individual pages
 - Link from individual pages → back to index
 - Cross-link between related comparisons
 
 **SEO value**:
+
 - Index pages can rank for broad terms like "project management tool comparisons"
 - Pass link equity to individual comparison pages
 - Help search engines discover all comparison content
 
 **Sorting options**:
+
 - By popularity (search volume)
 - Alphabetically
 - By category/use case
 - By date added (show freshness)
 
 **Include on index pages**:
+
 - Last updated date for credibility
 - Number of pages/comparisons available
 - Quick filters if you have many comparisons
@@ -243,6 +251,7 @@ Footer
 ```
 
 **Guidelines**:
+
 - Include up to 8 links per column (top competitors by search volume)
 - Add "View all" link to the full index page
 - Only create columns for formats you've actually built pages for

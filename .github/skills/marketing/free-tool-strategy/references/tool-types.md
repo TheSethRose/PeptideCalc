@@ -7,6 +7,7 @@ Detailed guide to each type of marketing tool you can build.
 **Best for**: Decisions involving numbers, comparisons, estimates
 
 **Examples**:
+
 - ROI calculator
 - Savings calculator
 - Cost comparison tool
@@ -17,12 +18,14 @@ Detailed guide to each type of marketing tool you can build.
 - Break-even calculator
 
 **Why they work**:
+
 - Personalized output
 - High perceived value
 - Share-worthy results
 - Clear problem → solution
 
 **Implementation tips**:
+
 - Keep inputs simple
 - Show calculations transparently
 - Make results shareable
@@ -35,6 +38,7 @@ Detailed guide to each type of marketing tool you can build.
 **Best for**: Creating something useful quickly
 
 **Examples**:
+
 - Policy generator (privacy, terms)
 - Template generator
 - Name/tagline generator
@@ -45,12 +49,14 @@ Detailed guide to each type of marketing tool you can build.
 - Contract generator
 
 **Why they work**:
+
 - Tangible output
 - Saves time
 - Easily shared
 - Repeat usage
 
 **Implementation tips**:
+
 - Output should be immediately usable
 - Allow customization
 - Offer download/export options
@@ -63,6 +69,7 @@ Detailed guide to each type of marketing tool you can build.
 **Best for**: Evaluating existing work or assets
 
 **Examples**:
+
 - Website grader
 - SEO analyzer
 - Email subject tester
@@ -73,12 +80,14 @@ Detailed guide to each type of marketing tool you can build.
 - Code quality analyzer
 
 **Why they work**:
+
 - Curiosity-driven
 - Personalized insights
 - Creates awareness of problems
 - Natural lead to solution
 
 **Implementation tips**:
+
 - Score or grade for gamification
 - Benchmark against averages
 - Provide actionable recommendations
@@ -91,6 +100,7 @@ Detailed guide to each type of marketing tool you can build.
 **Best for**: Checking if something works
 
 **Examples**:
+
 - Meta tag preview
 - Email rendering test
 - Mobile-friendly test
@@ -101,12 +111,14 @@ Detailed guide to each type of marketing tool you can build.
 - Broken link finder
 
 **Why they work**:
+
 - Immediate utility
 - Bookmark-worthy
 - Repeat usage
 - Professional necessity
 
 **Implementation tips**:
+
 - Fast results are essential
 - Show pass/fail clearly
 - Provide fix instructions
@@ -119,6 +131,7 @@ Detailed guide to each type of marketing tool you can build.
 **Best for**: Reference material
 
 **Examples**:
+
 - Icon library
 - Template library
 - Code snippet library
@@ -129,12 +142,14 @@ Detailed guide to each type of marketing tool you can build.
 - Font pairing tool
 
 **Why they work**:
+
 - High SEO value
 - Ongoing traffic
 - Establishes authority
 - Linkable asset
 
 **Implementation tips**:
+
 - Make searchable/filterable
 - Allow easy copying/downloading
 - Update regularly
@@ -147,6 +162,7 @@ Detailed guide to each type of marketing tool you can build.
 **Best for**: Learning/understanding
 
 **Examples**:
+
 - Interactive tutorials
 - Code playgrounds
 - Visual explainers
@@ -157,12 +173,14 @@ Detailed guide to each type of marketing tool you can build.
 - Configurators
 
 **Why they work**:
+
 - Engages deeply
 - Demonstrates expertise
 - Shareable
 - Memory-creating
 
 **Implementation tips**:
+
 - Make it hands-on
 - Show immediate feedback
 - Lead to deeper resources
@@ -173,6 +191,7 @@ Detailed guide to each type of marketing tool you can build.
 ## Tool Concept Examples by Industry
 
 ### SaaS Product
+
 - Product ROI calculator
 - Competitor comparison tool
 - Readiness assessment quiz
@@ -180,6 +199,7 @@ Detailed guide to each type of marketing tool you can build.
 - Feature configurator
 
 ### Agency/Services
+
 - Industry benchmark tool
 - Project scoping calculator
 - Portfolio review tool
@@ -187,6 +207,7 @@ Detailed guide to each type of marketing tool you can build.
 - Proposal generator
 
 ### E-commerce
+
 - Product finder quiz
 - Comparison tool
 - Size/fit calculator
@@ -194,6 +215,7 @@ Detailed guide to each type of marketing tool you can build.
 - Gift finder
 
 ### Developer Tools
+
 - Code snippet library
 - Testing/preview tool
 - Documentation generator
@@ -201,6 +223,7 @@ Detailed guide to each type of marketing tool you can build.
 - API playground
 
 ### Finance
+
 - Financial calculators
 - Investment comparison
 - Budget planner

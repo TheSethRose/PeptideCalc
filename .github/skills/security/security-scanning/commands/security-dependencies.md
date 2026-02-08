@@ -310,7 +310,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "0 2 * * *"
+    - cron: '0 2 * * *'
 
 jobs:
   scan-dependencies:
@@ -347,7 +347,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: scan-${{ matrix.ecosystem }}
-          path: "*.json"
+          path: '*.json'
 
       - name: Check Thresholds
         run: |

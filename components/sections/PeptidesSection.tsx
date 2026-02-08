@@ -9,7 +9,7 @@ interface PeptidesSectionProps {
 }
 
 export const PeptidesSection: React.FC<PeptidesSectionProps> = ({ vials, setVials }) => {
-  const updateVial = (index: number, field: keyof Vial, value: any) => {
+  const updateVial = (index: number, field: keyof Vial, value: Vial[keyof Vial]) => {
     const newVials = [...vials];
     newVials[index] = { ...newVials[index], [field]: value };
     setVials(newVials);
@@ -52,16 +52,40 @@ export const PeptidesSection: React.FC<PeptidesSectionProps> = ({ vials, setVial
       <table className="w-full table-fixed">
         <thead>
           <tr style={{ borderBottom: '1px solid var(--border)' }}>
-            <th className="text-left py-2 text-xs font-semibold w-[35%]" style={{ color: 'var(--muted-foreground)' }}>Name</th>
-            <th className="text-left py-2 px-1 text-xs font-semibold w-[20%]" style={{ color: 'var(--muted-foreground)' }}>Cost</th>
-            <th className="text-left py-2 px-1 text-xs font-semibold w-[15%]" style={{ color: 'var(--muted-foreground)' }}>mg</th>
-            <th className="text-left py-2 px-1 text-xs font-semibold w-[20%]" style={{ color: 'var(--muted-foreground)' }}>ml (H2O)</th>
+            <th
+              className="text-left py-2 text-xs font-semibold w-[35%]"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
+              Name
+            </th>
+            <th
+              className="text-left py-2 px-1 text-xs font-semibold w-[20%]"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
+              Cost
+            </th>
+            <th
+              className="text-left py-2 px-1 text-xs font-semibold w-[15%]"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
+              mg
+            </th>
+            <th
+              className="text-left py-2 px-1 text-xs font-semibold w-[20%] whitespace-nowrap"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
+              Mix Vol. (mL)
+            </th>
             <th className="w-[10%]" />
           </tr>
         </thead>
         <tbody>
           {vials.map((vial, idx) => (
-            <tr key={vial.id} className="group" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+            <tr
+              key={vial.id}
+              className="group"
+              style={{ borderBottom: '1px solid var(--border-subtle)' }}
+            >
               <td className="py-2 pr-1">
                 <input
                   type="text"

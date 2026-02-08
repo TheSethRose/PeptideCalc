@@ -1,16 +1,6 @@
 ---
 description: Static Application Security Testing (SAST) for code vulnerability analysis across multiple languages and frameworks
-globs:
-  [
-    "**/*.py",
-    "**/*.js",
-    "**/*.ts",
-    "**/*.java",
-    "**/*.rb",
-    "**/*.go",
-    "**/*.rs",
-    "**/*.php",
-  ]
+globs: ['**/*.py', '**/*.js', '**/*.ts', '**/*.java', '**/*.rb', '**/*.go', '**/*.rs', '**/*.php']
 keywords:
   [
     sast,
@@ -60,26 +50,9 @@ bandit -r . -ll -ii -f json  # High/Critical only
 **Configuration**: `.bandit`
 
 ```yaml
-exclude_dirs: ["/tests/", "/venv/", "/.tox/", "/build/"]
+exclude_dirs: ['/tests/', '/venv/', '/.tox/', '/build/']
 tests:
-  [
-    B201,
-    B301,
-    B302,
-    B303,
-    B304,
-    B305,
-    B307,
-    B308,
-    B312,
-    B323,
-    B324,
-    B501,
-    B502,
-    B506,
-    B602,
-    B608,
-  ]
+  [B201, B301, B302, B303, B304, B305, B307, B308, B312, B323, B324, B501, B502, B506, B602, B608]
 skips: [B101]
 ```
 
@@ -126,8 +99,8 @@ rules:
     severity: ERROR
     languages: [python]
     metadata:
-      cwe: "CWE-89"
-      owasp: "A03:2021-Injection"
+      cwe: 'CWE-89'
+      owasp: 'A03:2021-Injection'
 
   - id: dangerous-innerHTML
     pattern: $ELEM.innerHTML = $VAR
@@ -135,14 +108,14 @@ rules:
     severity: ERROR
     languages: [javascript, typescript]
     metadata:
-      cwe: "CWE-79"
+      cwe: 'CWE-79'
 
   - id: hardcoded-aws-credentials
     patterns:
       - pattern: $KEY = "AKIA..."
       - metavariable-regex:
           metavariable: $KEY
-          regex: "(aws_access_key_id|AWS_ACCESS_KEY_ID)"
+          regex: '(aws_access_key_id|AWS_ACCESS_KEY_ID)'
     message: Hardcoded AWS credentials detected
     severity: ERROR
     languages: [python, javascript, java]
@@ -210,7 +183,7 @@ element.textContent = userInput;
 <div>{userInput}</div>;
 
 // Sanitize when HTML required
-import DOMPurify from "dompurify";
+import DOMPurify from 'dompurify';
 element.innerHTML = DOMPurify.sanitize(userInput);
 ```
 
@@ -328,11 +301,11 @@ CORS(app, origins=['https://example.com'])
 **SECURE**:
 
 ```javascript
-const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 app.use(helmet());
-app.use(cors({ origin: "https://example.com" }));
+app.use(cors({ origin: 'https://example.com' }));
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 ```
 
@@ -471,7 +444,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install tools
         run: |

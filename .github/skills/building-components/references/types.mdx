@@ -18,14 +18,13 @@ const Card = ({ title, description, footer, ...props }) => (
       <h2>{title}</h2>
       <p>{description}</p>
     </div>
-    <div className="card-footer">
-      {footer}
-    </div>
+    <div className="card-footer">{footer}</div>
   </div>
 );
 ```
 
 As we discussed in [Composition](/composition), this approach creates several problems:
+
 - You can't customize the header styling without adding more props
 - You can't control the HTML elements used for title and description
 - You're forced into a specific DOM structure
@@ -33,6 +32,7 @@ As we discussed in [Composition](/composition), this approach creates several pr
 Instead, each layer should be its own component. This allows you to customize each layer independently, and to control the exact HTML elements used for the title and description.
 
 The benefits of this approach are:
+
 - **Maximum customization** - Users can style and modify each layer independently
 - **No prop drilling** - Props go directly to the element that needs them
 - **Semantic HTML** - Users can see and control the exact DOM structure
@@ -51,9 +51,7 @@ export type CardRootProps = React.ComponentProps<'div'> & {
   variant?: 'default' | 'outlined';
 };
 
-export const CardRoot = ({ variant = 'default', ...props }: CardRootProps) => (
-  <div {...props} />
-);
+export const CardRoot = ({ variant = 'default', ...props }: CardRootProps) => <div {...props} />;
 ```
 
 ### Common HTML Attribute Types
@@ -102,9 +100,7 @@ import type { ComponentProps } from 'react';
 
 export type ShareButtonProps = ComponentProps<'button'>;
 
-export const ShareButton = (props: ShareButtonProps) => (
-  <button {...props} />
-);
+export const ShareButton = (props: ShareButtonProps) => <button {...props} />;
 ```
 
 ## Exporting Types

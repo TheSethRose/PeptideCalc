@@ -846,7 +846,7 @@ on:
     branches: [main, develop]
   pull_request:
   schedule:
-    - cron: "0 0 * * *" # Daily compliance check
+    - cron: '0 0 * * *' # Daily compliance check
 
 jobs:
   compliance-scan:

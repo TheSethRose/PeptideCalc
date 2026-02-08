@@ -39,11 +39,11 @@ export interface ScheduleRow {
   vialMgRemainingBefore: number;
   vialMgRemainingAfter: number;
   vialMlRemainingAfter: number;
-  
+
   // Costing
   cumulativeCost: number; // Cash flow (buying items)
   weeklyAmortizedCost: number; // Value consumed this week
-  
+
   // Events
   isNewVial: boolean;
   isNewBaw: boolean;

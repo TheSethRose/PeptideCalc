@@ -45,10 +45,7 @@ export const CardHeader: React.FC<CardHeaderProps> = ({ title, subtitle, icon, a
     <div className="flex items-center gap-2">
       {icon && <span style={{ color: 'var(--muted-foreground)' }}>{icon}</span>}
       <div>
-        <h2
-          className="text-lg font-semibold"
-          style={{ color: 'var(--card-foreground)' }}
-        >
+        <h2 className="text-lg font-semibold" style={{ color: 'var(--card-foreground)' }}>
           {title}
         </h2>
         {subtitle && (
@@ -68,7 +65,5 @@ interface CardContentProps {
 }
 
 export const CardContent: React.FC<CardContentProps> = ({ children, className = '' }) => (
-  <div className={`p-5 ${className}`}>
-    {children}
-  </div>
+  <div className={`p-5 ${className}`}>{children}</div>
 );

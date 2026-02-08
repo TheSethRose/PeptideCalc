@@ -8,8 +8,15 @@ interface ProtocolSectionProps {
   setProtocolSteps: React.Dispatch<React.SetStateAction<ProtocolStep[]>>;
 }
 
-export const ProtocolSection: React.FC<ProtocolSectionProps> = ({ protocolSteps, setProtocolSteps }) => {
-  const updateProtocol = (index: number, field: keyof ProtocolStep, value: any) => {
+export const ProtocolSection: React.FC<ProtocolSectionProps> = ({
+  protocolSteps,
+  setProtocolSteps,
+}) => {
+  const updateProtocol = (
+    index: number,
+    field: keyof ProtocolStep,
+    value: ProtocolStep[keyof ProtocolStep],
+  ) => {
     const newSteps = [...protocolSteps];
     newSteps[index] = { ...newSteps[index], [field]: value };
     setProtocolSteps(newSteps);
@@ -58,15 +65,34 @@ export const ProtocolSection: React.FC<ProtocolSectionProps> = ({ protocolSteps,
       <table className="w-full table-fixed">
         <thead>
           <tr style={{ borderBottom: '1px solid var(--border)' }}>
-            <th className="text-left py-2 text-xs font-semibold w-[25%]" style={{ color: 'var(--muted-foreground)' }}>Start Wk</th>
-            <th className="text-left py-2 px-1 text-xs font-semibold w-[25%]" style={{ color: 'var(--muted-foreground)' }}>End Wk</th>
-            <th className="text-left py-2 px-1 text-xs font-semibold w-[30%]" style={{ color: 'var(--muted-foreground)' }}>Dose (mg)</th>
+            <th
+              className="text-left py-2 text-xs font-semibold w-[25%]"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
+              Start Wk
+            </th>
+            <th
+              className="text-left py-2 px-1 text-xs font-semibold w-[25%]"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
+              End Wk
+            </th>
+            <th
+              className="text-left py-2 px-1 text-xs font-semibold w-[30%]"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
+              Dose (mg)
+            </th>
             <th className="w-[15%]" />
           </tr>
         </thead>
         <tbody>
           {protocolSteps.map((step, idx) => (
-            <tr key={step.id} className="group" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+            <tr
+              key={step.id}
+              className="group"
+              style={{ borderBottom: '1px solid var(--border-subtle)' }}
+            >
               <td className="py-2 pr-1">
                 <input
                   type="number"
@@ -113,7 +139,7 @@ export const ProtocolSection: React.FC<ProtocolSectionProps> = ({ protocolSteps,
         </tbody>
       </table>
       <p className="text-[10px] mt-2 italic" style={{ color: 'var(--muted-foreground)' }}>
-        Leave "End Wk" empty for ongoing dosage.
+        Leave “End Wk” empty for ongoing dosage.
       </p>
     </section>
   );

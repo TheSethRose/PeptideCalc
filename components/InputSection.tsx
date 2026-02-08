@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Vial, BacWaterItem, SyringeConfig, ProtocolStep } from '../types';
-import { RotateCcw, Settings2 } from 'lucide-react';
+import { RotateCcw, Settings2, PanelLeftClose } from 'lucide-react';
 import { Card, CardHeader, CardContent } from './ui';
 import { ParametersSection } from './sections/ParametersSection';
 import { PeptidesSection } from './sections/PeptidesSection';
@@ -19,13 +19,14 @@ interface InputSectionProps {
   setProtocolSteps: React.Dispatch<React.SetStateAction<ProtocolStep[]>>;
   startDate: string;
   setStartDate: (val: string) => void;
-  startWeek: number;
-  setStartWeek: (val: number) => void;
+  currentDate: string;
+  setCurrentDate: (val: string) => void;
   discountPercent: number;
   setDiscountPercent: (val: number) => void;
   reorderLeadWeeks: number;
   setReorderLeadWeeks: (val: number) => void;
   resetDefaults: () => void;
+  onCollapse?: () => void;
 }
 
 export const InputSection: React.FC<InputSectionProps> = ({
@@ -39,67 +40,123 @@ export const InputSection: React.FC<InputSectionProps> = ({
   setProtocolSteps,
   startDate,
   setStartDate,
-  startWeek,
-  setStartWeek,
+  currentDate,
+  setCurrentDate,
   discountPercent,
   setDiscountPercent,
   reorderLeadWeeks,
   setReorderLeadWeeks,
   resetDefaults,
+  onCollapse,
 }) => {
+  const [activeTab, setActiveTab] = useState<'parameters' | 'inventory'>('parameters');
+
   const Divider = () => (
     <hr style={{ border: 'none', borderTop: '1px solid var(--border-subtle)', margin: 0 }} />
   );
 
   return (
-    <Card className="h-full">
+    <Card>
       <CardHeader
         title="Settings"
         icon={<Settings2 className="w-5 h-5" />}
         action={
-          <button
-            onClick={resetDefaults}
-            className="text-xs font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors"
-            style={{
-              color: 'var(--muted-foreground)',
-              border: '1px solid transparent',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'var(--border)';
-              e.currentTarget.style.backgroundColor = 'var(--card)';
-              e.currentTarget.style.color = 'var(--primary)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'transparent';
-              e.currentTarget.style.backgroundColor = 'transparent';
-              e.currentTarget.style.color = 'var(--muted-foreground)';
-            }}
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            Reset
-          </button>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={resetDefaults}
+              className="text-xs font-medium flex items-center gap-1.5 px-2 py-1.5 rounded-md transition-colors"
+              style={{
+                color: 'var(--muted-foreground)',
+                border: '1px solid transparent',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border)';
+                e.currentTarget.style.backgroundColor = 'var(--card)';
+                e.currentTarget.style.color = 'var(--primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'transparent';
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.color = 'var(--muted-foreground)';
+              }}
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              Reset
+            </button>
+            {onCollapse && (
+              <button
+                onClick={onCollapse}
+                className="p-1.5 rounded-md transition-colors"
+                style={{ color: 'var(--muted-foreground)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--muted)';
+                  e.currentTarget.style.color = 'var(--primary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = 'var(--muted-foreground)';
+                }}
+                aria-label="Collapse settings"
+              >
+                <PanelLeftClose className="w-4 h-4" />
+              </button>
+            )}
+          </div>
         }
       />
 
       <CardContent className="space-y-6">
-        <ParametersSection
-          startDate={startDate}
-          setStartDate={setStartDate}
-          startWeek={startWeek}
-          setStartWeek={setStartWeek}
-          discountPercent={discountPercent}
-          setDiscountPercent={setDiscountPercent}
-          reorderLeadWeeks={reorderLeadWeeks}
-          setReorderLeadWeeks={setReorderLeadWeeks}
-        />
-        <Divider />
-        <PeptidesSection vials={vials} setVials={setVials} />
-        <Divider />
-        <BacWaterSection bawInventory={bawInventory} setBawInventory={setBawInventory} />
-        <Divider />
-        <SyringesSection syringeConfig={syringeConfig} setSyringeConfig={setSyringeConfig} />
-        <Divider />
-        <ProtocolSection protocolSteps={protocolSteps} setProtocolSteps={setProtocolSteps} />
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setActiveTab('parameters')}
+            className="px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors"
+            style={{
+              backgroundColor: activeTab === 'parameters' ? 'var(--primary)' : 'var(--muted)',
+              color:
+                activeTab === 'parameters' ? 'var(--primary-foreground)' : 'var(--card-foreground)',
+            }}
+          >
+            Parameters
+          </button>
+          <button
+            onClick={() => setActiveTab('inventory')}
+            className="px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors"
+            style={{
+              backgroundColor: activeTab === 'inventory' ? 'var(--primary)' : 'var(--muted)',
+              color:
+                activeTab === 'inventory' ? 'var(--primary-foreground)' : 'var(--card-foreground)',
+            }}
+          >
+            Inventory
+          </button>
+        </div>
+
+        {activeTab === 'parameters' && (
+          <div className="space-y-6">
+            <ParametersSection
+              startDate={startDate}
+              setStartDate={setStartDate}
+              currentDate={currentDate}
+              setCurrentDate={setCurrentDate}
+              discountPercent={discountPercent}
+              setDiscountPercent={setDiscountPercent}
+              reorderLeadWeeks={reorderLeadWeeks}
+              setReorderLeadWeeks={setReorderLeadWeeks}
+            />
+            <Divider />
+            <ProtocolSection protocolSteps={protocolSteps} setProtocolSteps={setProtocolSteps} />
+          </div>
+        )}
+
+        {activeTab === 'inventory' && (
+          <div className="space-y-6">
+            <PeptidesSection vials={vials} setVials={setVials} />
+            <Divider />
+            <BacWaterSection bawInventory={bawInventory} setBawInventory={setBawInventory} />
+            <Divider />
+            <SyringesSection syringeConfig={syringeConfig} setSyringeConfig={setSyringeConfig} />
+          </div>
+        )}
       </CardContent>
     </Card>
   );

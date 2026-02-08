@@ -8,8 +8,15 @@ interface BacWaterSectionProps {
   setBawInventory: React.Dispatch<React.SetStateAction<BacWaterItem[]>>;
 }
 
-export const BacWaterSection: React.FC<BacWaterSectionProps> = ({ bawInventory, setBawInventory }) => {
-  const updateBaw = (index: number, field: keyof BacWaterItem, value: any) => {
+export const BacWaterSection: React.FC<BacWaterSectionProps> = ({
+  bawInventory,
+  setBawInventory,
+}) => {
+  const updateBaw = (
+    index: number,
+    field: keyof BacWaterItem,
+    value: BacWaterItem[keyof BacWaterItem],
+  ) => {
     const newBaw = [...bawInventory];
     newBaw[index] = { ...newBaw[index], [field]: value };
     setBawInventory(newBaw);
@@ -50,15 +57,34 @@ export const BacWaterSection: React.FC<BacWaterSectionProps> = ({ bawInventory, 
       <table className="w-full table-fixed">
         <thead>
           <tr style={{ borderBottom: '1px solid var(--border)' }}>
-            <th className="text-left py-2 text-xs font-semibold w-[45%]" style={{ color: 'var(--muted-foreground)' }}>Name</th>
-            <th className="text-left py-2 px-1 text-xs font-semibold w-[20%]" style={{ color: 'var(--muted-foreground)' }}>Size (ml)</th>
-            <th className="text-left py-2 px-1 text-xs font-semibold w-[20%]" style={{ color: 'var(--muted-foreground)' }}>Cost</th>
+            <th
+              className="text-left py-2 text-xs font-semibold w-[45%]"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
+              Name
+            </th>
+            <th
+              className="text-left py-2 px-1 text-xs font-semibold w-[20%]"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
+              Size (ml)
+            </th>
+            <th
+              className="text-left py-2 px-1 text-xs font-semibold w-[20%]"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
+              Cost
+            </th>
             <th className="w-[15%]" />
           </tr>
         </thead>
         <tbody>
           {bawInventory.map((item, idx) => (
-            <tr key={item.id} className="group" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+            <tr
+              key={item.id}
+              className="group"
+              style={{ borderBottom: '1px solid var(--border-subtle)' }}
+            >
               <td className="py-2 pr-1">
                 <input
                   type="text"

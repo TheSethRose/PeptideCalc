@@ -9,9 +9,9 @@ interface DashboardStatsProps {
 }
 
 export const DashboardStats: React.FC<DashboardStatsProps> = ({ simulation }) => {
-  const { totalCashCost, runoutDate, weeksCovered, avgWeeklyCost } = simulation;
+  const { totalCashCost, weeksCovered, avgWeeklyCost } = simulation;
 
-  const reorderRow = simulation.schedule.find(r => r.isReorderWarning);
+  const reorderRow = simulation.schedule.find((r) => r.isReorderWarning);
   const reorderDate = reorderRow ? reorderRow.date : null;
 
   return (
