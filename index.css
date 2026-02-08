@@ -1,0 +1,162 @@
+/* ================================================================
+   PeptideCalc — Design Tokens
+   Semantic CSS variables for light/dark theming.
+   Following building-components/design-tokens pattern.
+   ================================================================ */
+
+:root {
+  /* Surface tokens */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+
+  --surface: #f8fafc;     /* Subtle bg (table headers, section bg) */
+  --surface-foreground: #475569;
+
+  /* Brand / Primary */
+  --primary: #0284c7;
+  --primary-foreground: #ffffff;
+  --primary-subtle: #e0f2fe;
+
+  /* Semantic */
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+
+  --accent: #f0f9ff;
+  --accent-foreground: #0c4a6e;
+
+  /* Borders & rings */
+  --border: #e2e8f0;
+  --border-subtle: #f1f5f9;
+  --ring: #0284c7;
+
+  /* Input */
+  --input: #ffffff;
+  --input-border: #cbd5e1;
+  --input-foreground: #0f172a;
+  --input-placeholder: #94a3b8;
+
+  /* Destructive */
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  /* Semantic status colors */
+  --success: #10b981;
+  --success-subtle: #ecfdf5;
+  --success-foreground: #065f46;
+
+  --warning: #f59e0b;
+  --warning-subtle: #fffbeb;
+  --warning-foreground: #92400e;
+
+  --info: #3b82f6;
+  --info-subtle: #eff6ff;
+  --info-foreground: #1e40af;
+
+  --purple: #8b5cf6;
+  --purple-subtle: #f5f3ff;
+  --purple-foreground: #5b21b6;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+
+  /* Radius */
+  --radius: 0.75rem;
+  --radius-sm: 0.5rem;
+  --radius-lg: 1rem;
+
+  /* Transitions */
+  --transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #e5e5e5;
+
+  --card: #111111;
+  --card-foreground: #e5e5e5;
+
+  --surface: #171717;
+  --surface-foreground: #a3a3a3;
+
+  --primary: #d4d4d4;
+  --primary-foreground: #0a0a0a;
+  --primary-subtle: #262626;
+
+  --muted: #1a1a1a;
+  --muted-foreground: #a3a3a3;
+
+  --accent: #262626;
+  --accent-foreground: #d4d4d4;
+
+  --border: #2a2a2a;
+  --border-subtle: #1f1f1f;
+  --ring: #d4d4d4;
+
+  --input: #111111;
+  --input-border: #333333;
+  --input-foreground: #e5e5e5;
+  --input-placeholder: #737373;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #111827;
+
+  --success: #22c55e;
+  --success-subtle: #0f1a14;
+  --success-foreground: #bbf7d0;
+
+  --warning: #f59e0b;
+  --warning-subtle: #1f160a;
+  --warning-foreground: #fde68a;
+
+  --info: #a3a3a3;
+  --info-subtle: #1f1f1f;
+  --info-foreground: #e5e5e5;
+
+  --purple: #a78bfa;
+  --purple-subtle: #1f1b2a;
+  --purple-foreground: #ddd6fe;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.35);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.45), 0 1px 2px -1px rgb(0 0 0 / 0.35);
+}
+
+/* ================================================================
+   Global resets
+   ================================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+/* ================================================================
+   Scrollbar (themed)
+   ================================================================ */
+
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--input-border);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}

@@ -1,0 +1,5 @@
+{
+  "name": "PeptideCalc",
+  "description": "A precision peptide dosing calculator and inventory schedule tracker designed to help manage vials, calculate units, and track costs over time.",
+  "requestFramePermissions": []
+}
