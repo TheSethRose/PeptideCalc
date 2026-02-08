@@ -658,11 +658,11 @@ function App() {
             <ShieldCheck className="w-5 h-5 text-emerald-500" />
             <div className="flex flex-col">
               <span className="text-slate-200 font-medium group-hover:text-emerald-400 transition-colors flex items-center gap-1">
-                Recommended Source: Everyday Peptides
+                Recommended: Everyday Peptides
                 <ExternalLink className="w-3 h-3 opacity-50" />
               </span>
               <span className="text-xs text-slate-500">
-                Traceable, lot-tracked research materials (RUO).
+                Third-party testing with batch-level reporting.
               </span>
             </div>
           </a>
